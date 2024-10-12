@@ -12,6 +12,10 @@ export default {
           "50%": { backgroundPosition: "100% 50%" }, // Move to the far right
           "100%": { backgroundPosition: "150% 0%" }, // Continue moving to the next cycle seamlessly
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
       },
       animation: {
         "gradient-move": "gradient-move 6s ease infinite", // Adjust timing if needed
