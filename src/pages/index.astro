@@ -1,8 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
 ---
 
 <Layout title="Home">
-  <h1>Welcome to Astro</h1>
-  <p>Start editing to see some magic happen!</p>
+  <div class="flex flex-col items-center justify-center h-screen">
+    <Image
+      src="/Demura.svg"
+      alt="A bird."
+      width="500"
+      height="500"
+      class="hover:animate-glitch"
+    />
+    <p>The Eternal Projects</p>
+  </div>
 </Layout>
