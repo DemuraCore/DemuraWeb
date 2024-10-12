@@ -1,4 +1,6 @@
 ---
+import "../style/base.css";
+import Footer from "../components/Footer.astro";
 interface Props {
   title: string;
 }
@@ -16,8 +18,11 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="bg-[#191919] text-white mx-5">
+  <body
+    class="bg-gradient-to-r from-black via-gray-800 to-black text-white bg-[length:300%_100%] animate-gradient-move"
+  >
     <slot />
+    <Footer />
     <audio id="background-music" src="/music.mp3" autoplay loop></audio>
   </body>
 

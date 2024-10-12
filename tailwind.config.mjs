@@ -3,54 +3,21 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      backgroundSize: {
+        "300%": "300% 100%", // Increase the background size to make the transition smoother
+      },
       keyframes: {
-        glitch: {
-          "0%, 100%": {
-            clip: "rect(0, 9999px, 0, 0)",
-            transform: "translate(0)",
-          },
-          "10%": {
-            clip: "rect(30%, 9999px, 60%, 0)",
-            transform: "translate(-5px, -5px)",
-          },
-          "20%": {
-            clip: "rect(10%, 9999px, 80%, 0)",
-            transform: "translate(5px, 5px)",
-          },
-          "30%": {
-            clip: "rect(40%, 9999px, 40%, 0)",
-            transform: "translate(-5px, 5px)",
-          },
-          "40%": {
-            clip: "rect(20%, 9999px, 80%, 0)",
-            transform: "translate(5px, -5px)",
-          },
-          "50%": {
-            clip: "rect(50%, 9999px, 30%, 0)",
-            transform: "translate(-5px, 5px)",
-          },
-          "60%": {
-            clip: "rect(60%, 9999px, 40%, 0)",
-            transform: "translate(5px, -5px)",
-          },
-          "70%": {
-            clip: "rect(10%, 9999px, 50%, 0)",
-            transform: "translate(-5px, 5px)",
-          },
-          "80%": {
-            clip: "rect(20%, 9999px, 60%, 0)",
-            transform: "translate(5px, -5px)",
-          },
-          "90%": {
-            clip: "rect(40%, 9999px, 40%, 0)",
-            transform: "translate(-5px, 5px)",
-          },
+        "gradient-move": {
+          "0%": { backgroundPosition: "0% 50%" }, // Start from the far left
+          "50%": { backgroundPosition: "100% 50%" }, // Move to the far right
+          "100%": { backgroundPosition: "150% 0%" }, // Continue moving to the next cycle seamlessly
         },
       },
       animation: {
-        glitch: "glitch 0.5s infinite",
+        "gradient-move": "gradient-move 6s ease infinite", // Adjust timing if needed
       },
     },
   },
+
   plugins: [],
 };
