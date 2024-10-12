@@ -16,7 +16,18 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="bg-[#191919] text-white">
     <slot />
+    <audio id="background-music" src="/music.mp3" autoplay loop></audio>
   </body>
+
+  <script>
+    console.log("Music By Antent");
+    document.addEventListener("DOMContentLoaded", function () {
+      var audio = document.getElementById(
+        "background-music"
+      ) as HTMLAudioElement;
+      audio.volume = 0.3; // Set volume between 0.0 and 1.0
+    });
+  </script>
 </html>
