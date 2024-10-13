@@ -21,19 +21,21 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body
-    class="bg-gradient-to-r from-black via-gray-800 to-black text-white bg-[length:300%_100%] animate-gradient-move"
+    class="bg-gradient-to-r from-black via-gray-800 to-black text-white bg-[length:300%_100%] animate-gradient-move mt-3"
   >
     <slot />
-    <Footer />
+
     <audio
       id="background-music"
       src="/music.mp3"
       autoplay
       loop
       transition:persist></audio>
-  </body><script>
-    console.log("Music By Antent");
-    console.log("DemuraAI");
-    console.log("The Eternal Projects");
-  </script>
+    <script>
+      console.log("Music By Antent");
+      console.log("DemuraAI");
+      console.log("The Eternal Projects");
+    </script>
+    <Footer />
+  </body>
 </html>
