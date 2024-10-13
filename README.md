@@ -19,3 +19,7 @@ DemuraWeb is a project aimed at building a robust and scalable web application u
 - The project uses **TypeScript**, which is licensed under the **Apache 2.0 License**.
 - Other dependencies such as **AstroJS** and **TailwindCSS** are licensed under the **MIT License**.
 - The **Sharp** library is licensed under the **Apache 2.0 License**.
+
+## Copyright
+
+Music by Antent - Hold Me [Link](https://www.youtube.com/watch?v=AcL4blvV7Uk)
