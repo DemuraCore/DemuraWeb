@@ -18,7 +18,7 @@ export default {
         },
       },
       animation: {
-        "gradient-move": "gradient-move 6s ease infinite", // Adjust timing if needed
+        "gradient-move": "gradient-move 8s ease infinite", // Adjust timing if needed
       },
     },
   },

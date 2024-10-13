@@ -7,8 +7,61 @@ import LogoImage from "../assets/Demura.svg";
 <Layout title="DemuraAI">
   <div class="flex flex-col items-center justify-center h-screen mx-5">
     <Image src={LogoImage} alt="A bird." width="500" height="500" />
-    <a href="/log/0000-00-00" class="text-lg tracking-wide glow-effect"
+    <a href="/log" class="text-lg tracking-wide glow-effect glitch-item"
       >The Eternal Projects</a
     >
   </div>
 </Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const glitchItems = document.querySelectorAll(".glitch-item");
+    const possibleChars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/;[]=-~!@#$%^&*()+{}:?><€¡¥×«»¶¿çµñ©æáßðøöóíúüþéåä";
+
+    glitchItems.forEach((item) => {
+      const originalText = item.textContent ? item.textContent.trim() : "";
+      let timeouts: (number | undefined)[] = [];
+
+      item.addEventListener("mouseenter", () => {
+        const charArr = originalText.split("");
+        const strength = Math.ceil(charArr.length / 5); // Set glitch strength as 20%
+
+        const times = 10 * (500 / 1000); // Glitch speed: 10 per second, 500ms duration
+        for (let i = 0; i < times; i++) {
+          const speed = 1000 / 10; // Glitch speed in ms
+          timeouts.push(
+            setTimeout(() => {
+              for (let j = 0; j < strength; j++) {
+                const randChar = possibleChars.charAt(
+                  Math.floor(Math.random() * possibleChars.length)
+                );
+                const index = Math.floor(Math.random() * charArr.length);
+                charArr[index] = randChar;
+                item.textContent = charArr.join("");
+              }
+            }, i * speed)
+          );
+        }
+      });
+
+      item.addEventListener("mouseleave", () => {
+        timeouts.forEach(clearTimeout);
+        let charArr = item.textContent ? item.textContent.trim().split("") : [];
+        const interval = setInterval(() => {
+          if (charArr.join("") === originalText) {
+            clearInterval(interval);
+          } else {
+            for (let i = 0; i < charArr.length; i++) {
+              if (charArr[i] !== originalText[i]) {
+                charArr[i] = originalText[i];
+                break;
+              }
+            }
+            item.textContent = charArr.join("");
+          }
+        }, 50); // Smoother transition with a shorter interval
+      });
+    });
+  });
+</script>
