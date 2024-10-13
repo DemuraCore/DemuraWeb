@@ -2,10 +2,6 @@
 
 The Eternal Projects
 
-## Overview
-
-DemuraWeb is a project aimed at building a robust and scalable web application using modern web technologies.
-
 ## Dependencies
 
 - **TypeScript** (Apache License 2.0): Used to compile the code into JavaScript. The TypeScript compiler itself is licensed under the Apache 2.0 License.
