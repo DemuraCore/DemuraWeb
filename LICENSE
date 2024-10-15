@@ -1,4 +1,4 @@
-                      DemuraCore LICENSE 1.0
+                      DemuraCore LICENSE 1.2
                     Version 1, 13 October 2024
                  https://demura.vahry.my.id/license
 
@@ -6,29 +6,46 @@ Copyright (C) 2024 DemuraCore. <https://demura.vahry.my.id>
 
                               Preamble
 
-The software, code, or documentation ("Software") provided under this license is intended solely for non-commercial viewing. You are not permitted to modify, distribute, create derivative works, or use the Software for any commercial purposes.
+The software, code, or documentation ("Software") provided under
+this license is intended solely for non-commercial viewing. You are not permitted
+to modify, distribute, create derivative works, or use the Software for any commercial purposes.
 By using or accessing this Software, you agree to abide by the terms of this license.
 
                            Grant of License
 
-1.  You are permitted to view the source code of the Software for non-commercial purposes only. This means that you may use the Software solely for personal, educational, or research purposes. You may not use the Software to build or promote any commercial products or services.
+1.  You are permitted to view the source code of the Software for non-commercial purposes only.
+    This means that you may use the Software solely for personal, educational,
+    or research purposes. You may not use the Software to build or promote any commercial products or services.
 
-2.  You are not allowed to modify, rebrand, or create any derivative works of the Software. Any attempt to modify or alter the Software, in whole or in part, is strictly prohibited.
+2.  You are not allowed to modify, rebrand, or create any derivative works of the Software.
+    Any attempt to modify or alter the Software, in whole or in part, is strictly prohibited.
 
-3.  You may not redistribute, repost, or share the Software in any form, whether modified or unmodified, to any third parties, unless explicitly authorized by the original author. This includes not being permitted to "fork" the Software in any way.
+3.  You may not redistribute, repost, or share the Software in any form,
+    whether modified or unmodified, to any third parties, unless explicitly
+    authorized by the original author.
 
-4.  You may not use the Software for any commercial purposes, including but not limited to, using it to provide paid services, incorporate it into commercial products, or in any manner that generates revenue or promotes commercial activities.
+4.  You may not use the Software for any commercial purposes, including but not limited to,
+    using it to provide paid services, incorporate it into commercial products,
+    or in any manner that generates revenue or promotes commercial activities.
 
-                               Limitations
+                                   Limitations
 
-- The Software is provided as-is, without any warranties, express or implied, including but not limited to, the warranties of merchantability or fitness for a particular purpose.
-- The original author disclaims all liability for any damages resulting from the use of this Software, including but not limited to, loss of data, loss of business, or any other direct or indirect damages.
-- You acknowledge that this license does not grant you any rights to use the trademark, logo, or any other branding related to the Software.
+- The Software is provided as-is, without any warranties, express or implied,
+  including but not limited to, the warranties of merchantability or fitness for a particular purpose.
+- The original author disclaims all liability for any damages resulting from the
+  use of this Software, including but not limited to, loss of data, loss of business,
+  or any other direct or indirect damages.
+- You acknowledge that this license does not grant you any rights to use the trademark,
+  logo, or any other branding related to the Software.
 
                                 Termination
 
-  If you violate any of the terms outlined in this license, your rights under this license will automatically terminate. Upon termination, you must cease using the Software and remove any copies of the Software from your system.
+  If you violate any of the terms outlined in this license, your rights under
+  this license will automatically terminate. Upon termination, you must cease using the
+  Software and remove any copies of the Software from your system.
 
                                 Governing Law
 
-  This license shall be governed by and construed in accordance with the laws of the jurisdiction in which the original author resides, without regard to its conflict of law principles.
+  This license shall be governed by and construed in accordance with the
+  laws of the jurisdiction in which the original author resides, without
+  regard to its conflict of law principles.
