@@ -1,0 +1,21 @@
+name: Build and Push to Private Registry
+
+on:
+  push:
+    branches:
+      - main   # jalan otomatis kalau ada push ke branch main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t registry.vahry.my.id/deweb3:latest .
+
+      - name: Login to private registry
+        run: echo "${{ secrets.REGISTRY_PASSWORD }}" | docker login registry.vahry.my.id -u ${{ secrets.REGISTRY_USER }} --password-stdin
+
+      - name: Push Docker image
+        run: docker push registry.vahry.my.id/deweb3:latest
