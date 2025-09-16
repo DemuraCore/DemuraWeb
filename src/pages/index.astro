@@ -82,13 +82,13 @@ import Layout from "../layouts/Layout.astro";
             setTimeout(() => {
               for (let j = 0; j < strength; j++) {
                 const randChar = possibleChars.charAt(
-                  Math.floor(Math.random() * possibleChars.length)
+                  Math.floor(Math.random() * possibleChars.length),
                 );
                 const index = Math.floor(Math.random() * charArr.length);
                 charArr[index] = randChar;
                 item.textContent = charArr.join("");
               }
-            }, i * speed)
+            }, i * speed),
           );
         }
       });
