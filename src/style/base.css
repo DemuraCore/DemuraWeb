@@ -1,7 +1,42 @@
 /* The integration's default injected base.css file */
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #111;
+  background-image: radial-gradient(#333 1px, transparent 1px);
+  background-size: 10px 10px;
+  overflow-x: hidden;
+  font-family: sans-serif;
+}
+
+/* P5 Slanted Menu Item Drop Shadow Effect */
+.p5-shadow {
+  box-shadow: 6px 6px 0px #111;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.p5-shadow:hover {
+  box-shadow: 12px 12px 0px #111;
+  transform: translate(-4px, -4px) scale(1.05) skew(-5deg);
+}
+
+/* The aggressive red wipe overlay */
+#p5-transition-overlay {
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 120vw;
+  height: 120vh;
+  background-color: #e60012;
+  transform-origin: bottom left;
+  transform: rotate(15deg) translateY(100%);
+  z-index: 9999;
+  pointer-events: none;
+}
 
 .glow-effect {
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.5),

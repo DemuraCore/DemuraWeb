@@ -3,6 +3,15 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      colors: {
+        'p5-red': '#e60012',
+        'p5-black': '#111',
+        'p5-gray': '#222',
+        'p5-white': '#f8f8f8',
+      },
+      fontFamily: {
+        'display': ['"Anton"', 'sans-serif'], // A bold header font
+      },
       backgroundSize: {
         "300%": "300% 100%", // Increase the background size to make the transition smoother
       },

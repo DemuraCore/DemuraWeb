@@ -9,75 +9,1072 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="DemuraAI">
-  <div class="flex flex-col items-center justify-center h-screen mx-5">
-    <div class="w-64 sm:w-1/3">
-      <svg
-        id="Layer_2"
-        data-name="Layer 2"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 864.8 206.2"
+  <!-- P5 Angular Background Element -->
+  <div
+    class="fixed inset-0 z-0 overflow-hidden pointer-events-none"
+    id="bg-parallax"
+  >
+    <div
+      class="absolute top-[-30%] left-[-20%] w-[180%] h-[90%] bg-p5-red transform -rotate-6 origin-top-left border-b-[40px] border-p5-black shadow-2xl skew-y-3 transition-transform duration-[600ms] ease-out"
+      id="red-angle-bg"
+    >
+    </div>
+    <div
+      class="absolute top-[20%] right-[10%] w-64 h-64 border-[25px] border-black/20 rounded-full floating-shape transition-transform duration-[800ms] ease-out"
+      data-speed="-1.5"
+    >
+    </div>
+    <div
+      class="absolute bottom-[10%] left-[5%] w-80 h-80 bg-white/5 transform rotate-45 floating-shape transition-transform duration-[900ms] ease-out"
+      data-speed="2"
+    >
+    </div>
+    <div
+      class="absolute top-[70%] right-[15%] w-96 h-16 bg-black/40 transform -skew-x-12 floating-shape transition-transform duration-[700ms] ease-out"
+      data-speed="1.2"
+    >
+    </div>
+    <div
+      class="absolute top-[10%] left-[40%] w-32 h-32 border-[10px] border-p5-red/30 transform rotate-[30deg] floating-shape transition-transform duration-[1000ms] ease-out"
+      data-speed="-0.8"
+    >
+    </div>
+  </div>
+
+  <!-- SPA Multi-Transitions Container -->
+  <div
+    id="flash-overlay"
+    class="fixed inset-0 bg-p5-white z-[9999] pointer-events-none opacity-0 mix-blend-overlay"
+  >
+  </div>
+
+  <div
+    id="transition-layers"
+    class="fixed inset-0 z-[9998] pointer-events-none overflow-hidden"
+  >
+    <!-- 1. The Slash (Used for Projects) -->
+    <div
+      id="trans-slash"
+      class="absolute inset-0 flex items-center justify-center pointer-events-none"
+    >
+      <!-- Background white flash -->
+      <div class="absolute inset-0 bg-p5-white opacity-0 slash-bg z-0"></div>
+      <div
+        class="bg-p5-black w-[250%] h-[200%] transform -translate-y-[150%] rotate-[-35deg] shadow-[0_0_80px_rgba(230,0,18,1)] border-b-[80px] border-p5-red slice-block z-10"
+        style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%);"
       >
-        <g id="Layer_1-2" data-name="Layer 1">
-          <g>
-            <g>
-              <path
-                d="m779.1,147.2l-30.6-86-30.4,86h-30.2l42.6-120h36.3l42.6,120h-30.2Z"
-                style="fill: #fff; stroke-width: 0px;"></path>
-              <path
-                d="m852.1,147.2h-28.1V26.7h28.1v120.5Z"
-                style="fill: #fff; stroke-width: 0px;"></path>
-            </g>
-            <g>
-              <path
-                d="m29.8,147.4H4.8V27.5h81.2c4.5,0,8.8,1.6,12.8,4.7,4,3.1,7.5,7.4,10.5,12.9,3,5.4,5.4,11.8,7.1,19,1.7,7.3,2.6,15,2.6,23.2s-.9,16-2.6,23.2c-1.7,7.3-4.1,13.6-7.1,19-3,5.4-6.5,9.7-10.5,12.9-4,3.1-8.3,4.7-12.8,4.7H29.7v.2Zm46.5-100.1H29.7v79.9h45.5c2.7,0,5.2-1.1,7.5-3.2,2.3-2.2,4.3-5.1,6-8.8,1.7-3.7,3-8,3.9-12.7.9-4.8,1.4-9.9,1.4-15.2s-.5-10.6-1.5-15.4c-1-4.8-2.3-9-4-12.7-1.7-3.6-3.6-6.5-5.7-8.6-2.1-2.1-4.3-3.2-6.6-3.2h0Z"
-                style="fill: #fff; stroke-width: 0px;"></path>
+      </div>
+      <div
+        class="bg-p5-red w-[250%] h-[200%] transform -translate-y-[150%] rotate-[-35deg] slice-block-shadow z-0 absolute"
+        style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%); margin-top: 20px"
+      >
+      </div>
+
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-p5-white font-display text-9xl tracking-widest uppercase opacity-0 slice-text skew-x-[-15deg] whitespace-nowrap hidden z-20 mix-blend-difference drop-shadow-[5px_5px_0_rgba(230,0,18,1)]"
+      >
+        TAKE YOUR HEART
+      </div>
+    </div>
+
+    <!-- 2. The Shutters (Used for Profile) -->
+    <div
+      id="trans-shutters"
+      class="absolute inset-0 flex flex-col pointer-events-none"
+    >
+      <div
+        class="shutter-top w-[120%] h-[60%] bg-p5-red border-b-[40px] border-p5-black transform -translate-x-full -translate-y-10 rotate-[-5deg] drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)] z-10"
+      >
+      </div>
+      <div
+        class="shutter-bottom w-[120%] h-[60%] bg-p5-black border-t-[40px] border-p5-red transform translate-x-full translate-y-10 rotate-[-5deg] drop-shadow-[0_-20px_40px_rgba(0,0,0,0.9)]"
+      >
+      </div>
+    </div>
+
+    <!-- 3. The Call Card Expand (Used for Contact) -->
+    <div
+      id="trans-contact"
+      class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[9999]"
+    >
+      <div
+        class="absolute inset-0 bg-p5-red opacity-0 contact-bg z-0 pointer-events-none"
+      >
+      </div>
+      <div
+        class="contact-circle absolute w-[150vw] h-[150vw] sm:w-[100vw] sm:h-[100vw] bg-p5-black rotate-45 scale-0 flex flex-col items-center justify-center border-[20px] sm:border-[40px] border-p5-white z-10 pointer-events-none origin-center"
+      >
+      </div>
+      <span
+        class="text-p5-white font-display text-4xl sm:text-9xl opacity-0 contact-text transform -rotate-12 absolute whitespace-nowrap z-20 drop-shadow-[4px_4px_0_#e60012] mix-blend-difference pointer-events-none"
+      >
+        WE WILL TAKE YOUR HEART
+      </span>
+    </div>
+
+    <!-- 4. The Glitch Stripes (Used for Return to Home) -->
+    <div
+      id="trans-home"
+      class="absolute inset-0 flex pointer-events-none z-[9999]"
+    >
+      <div
+        class="glitch-stripe w-1/5 h-[120%] bg-p5-black transform -translate-y-full border-r-[25px] border-p5-red skew-x-12"
+      >
+      </div>
+      <div
+        class="glitch-stripe w-1/5 h-[120%] bg-p5-white transform translate-y-full border-r-[25px] border-p5-black -skew-x-12"
+      >
+      </div>
+      <div
+        class="glitch-stripe w-1/5 h-[120%] bg-p5-red transform -translate-y-full border-r-[25px] border-p5-white skew-x-12"
+      >
+      </div>
+      <div
+        class="glitch-stripe w-1/5 h-[120%] bg-p5-black transform translate-y-full border-r-[25px] border-p5-red -skew-x-12"
+      >
+      </div>
+      <div
+        class="glitch-stripe w-1/5 h-[120%] bg-p5-white transform -translate-y-full border-r-[25px] border-p5-red skew-x-12"
+      >
+      </div>
+    </div>
+
+    <!-- 5. Shattered Glass/Starburst (Used for Personas) -->
+    <div
+      id="trans-party"
+      class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[9999]"
+    >
+      <!-- Inner splinters -->
+      <div
+        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-black origin-center"
+        style="clip-path: polygon(50% 50%, 100% -20%, 120% 50%); transform: scale(0);"
+      >
+      </div>
+      <div
+        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-red origin-center"
+        style="clip-path: polygon(50% 50%, 120% 50%, 80% 120%); transform: scale(0);"
+      >
+      </div>
+      <div
+        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-white origin-center"
+        style="clip-path: polygon(50% 50%, 80% 120%, -20% 100%); transform: scale(0);"
+      >
+      </div>
+      <div
+        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-black origin-center"
+        style="clip-path: polygon(50% 50%, -20% 100%, -20% -20%); transform: scale(0);"
+      >
+      </div>
+      <div
+        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-red origin-center"
+        style="clip-path: polygon(50% 50%, -20% -20%, 100% -20%); transform: scale(0);"
+      >
+      </div>
+    </div>
+  </div>
+
+  <!-- 3D Scene Rig -->
+  <div
+    class="relative z-10 flex flex-col items-center justify-center h-screen mx-5 transform-gpu"
+    id="scene-container"
+    style="perspective: 1500px;"
+  >
+    <div
+      id="camera-rig"
+      class="w-full h-full flex flex-col items-center flex-1 justify-center transition-transform duration-[200ms] ease-out"
+      style="transform-style: preserve-3d;"
+    >
+      <!-- ============================================== -->
+      <!-- VIEW: MAIN MENU                                -->
+      <!-- ============================================== -->
+      <div
+        id="view-home"
+        class="page-view absolute inset-0 flex flex-col items-center justify-center w-full h-full"
+      >
+        <!-- Logo -->
+        <div
+          class="logo-container relative w-64 sm:w-96 mb-12 origin-bottom p-6 bg-p5-black border-[6px] border-p5-white shadow-[20px_20px_0px_0px_#e60012]"
+          style="transform: translateZ(80px) skewX(-8deg);"
+        >
+          <svg
+            id="Layer_2"
+            data-name="Layer 2"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 864.8 206.2"
+            class="w-full text-white fill-white"
+            style="filter: drop-shadow(6px 6px 0px rgba(255,255,255,0.3));"
+          >
+            <g id="Layer_1-2" data-name="Layer 1">
               <g>
-                <path
-                  d="m179.9,148.5c-16.8,0-29.7-3.1-38.8-9.4-9.1-6.3-13.7-15.3-13.7-27.1s3.9-20.4,11.6-26.7c7.7-6.4,18.6-9.5,32.7-9.5s23.6,2.9,30.8,8.6c7.3,5.7,10.9,14.1,10.9,25s-.2,6.2-.6,9h-69v-10.7h51.7c0-6.3-2.1-11.2-6.3-14.5-4.2-3.4-10-5.1-17.4-5.1s-14.8,2-19.4,6.1c-4.6,4.1-6.9,9.8-6.9,17.2s3.2,14.3,9.5,18.5c6.3,4.2,15.3,6.4,27,6.4s8.1-.2,12.1-.5c4-.3,8-.8,12.1-1.4l2.4,12.3c-5.8.8-11.1,1.3-15.9,1.5-4.8.2-9.1.3-12.8.3Z"
-                  style="fill: #fff; stroke-width: 0px;"></path>
-                <path
-                  d="m236.5,147.2v-70.2h17.4l2.2,14.8v55.4h-19.7Zm36.9,0v-55c0-4-2.6-6-7.8-6s-9.5,3.2-9.5,9.5l-5.7-10.1h6.3c.7-6.7,6.4-10.1,16.9-10.1s9.2,1.3,12.1,3.8c2.9,2.5,4.4,6.3,4.4,11.5v56.3h-16.7Zm33.9,0v-53.6c0-4.9-2.5-7.3-7.6-7.3s-9.6,3.2-9.6,9.5l-6.7-10.1h7.6c.3-2.7,1.8-5.1,4.6-7.1,2.7-2,6.7-3,11.9-3s11.7,1.3,14.8,3.9c3.1,2.6,4.6,6.8,4.6,12.6v55h-19.7Z"
-                  style="fill: #fff; stroke-width: 0px;"></path>
-                <path
-                  d="m383.3,148.5c-10.3,0-18.3-2.2-24-6.6-5.7-4.4-8.5-10.6-8.5-18.6v-46.3h19.7v46.3c0,4,1.6,7.1,4.8,9.3,3.2,2.2,7.7,3.3,13.5,3.3s12.6-1.6,16.2-4.9c3.6-3.2,5.5-8.7,5.5-16.3l5,18.9h-6.5c-1.5,4.8-4.6,8.4-9.1,11-4.5,2.6-10.1,3.8-16.7,3.8Zm27.3-21.2v-50.3h19.7v46.3l-19.7,4Zm1.7,20.5l-1.7-16.8v-12.3h19.7v15.8l13.5,1.5v11.3l-31.5.7Z"
-                  style="fill: #fff; stroke-width: 0px;"></path>
-                <path
-                  d="m456,147.2v-11.5h65.6v11.5h-65.6Zm3.7-58.7v-11.5h32.8l1.9,11.5h-34.7Zm18.2,58.7v-70.2h15.9l3.7,20.1v50.1h-19.7Zm19.7-30.2l-5.7-22h7.6c1.1-12.9,10.1-19.3,27.1-19.3s17.5,2.1,22.1,6.2c4.6,4.1,6.9,10.9,6.9,20.1h-19.5c0-5.1-1.1-8.8-3.2-11.1-2.1-2.3-5.6-3.4-10.3-3.4-8.3,0-14.6,2.5-18.7,7.6-4.1,5.1-6.2,12.3-6.2,21.8Z"
-                  style="fill: #fff; stroke-width: 0px;"></path>
-                <path
-                  d="m601,148.5c-10.3,0-18.2-1.8-23.8-5.3-5.6-3.5-8.4-8.5-8.4-15s3.9-13.1,11.6-17.1c7.8-4,18.7-6,32.9-6s11.1.3,15.7.8c4.6.5,8.7,1.3,12.3,2.3l-4.1,9.5c-4.1-.7-8.2-1-12.1-1.2-4-.1-8-.2-12.1-.2-17.1,0-25.6,3.7-25.6,11.1s1.5,5.5,4.4,7.2c2.9,1.7,7.1,2.5,12.5,2.5s11.2-.8,15.3-2.3c4.1-1.5,7.2-3.4,9.2-5.8,2-2.3,3.1-4.7,3.1-7.2v-7.7l5.7,18h-7.8l3.2-2.1c0,4.1-1.3,7.4-3.9,10.2-2.6,2.7-6.3,4.7-11.1,6.1-4.8,1.3-10.4,2-16.9,2Zm34.7-.7l-1.3-20.8-2.6-5.8v-18.1c0-4.7-2.3-8.1-6.9-10.3-4.6-2.2-11.4-3.4-20.5-3.5l-23.5-.5,1.9-12.4,19.8.2c16.3.2,28.3,2.7,36.2,7.5s11.8,11.9,11.8,21.2v29.3l16.7,1.5v11.3l-31.5.7Z"
-                  style="fill: #fff; stroke-width: 0px;"></path>
+                <g>
+                  <path
+                    d="m779.1,147.2l-30.6-86-30.4,86h-30.2l42.6-120h36.3l42.6,120h-30.2Z"
+                    style="fill: currentColor; stroke-width: 0px;"></path>
+                  <path
+                    d="m852.1,147.2h-28.1V26.7h28.1v120.5Z"
+                    style="fill: currentColor; stroke-width: 0px;"></path>
+                </g>
+                <g>
+                  <path
+                    d="m29.8,147.4H4.8V27.5h81.2c4.5,0,8.8,1.6,12.8,4.7,4,3.1,7.5,7.4,10.5,12.9,3,5.4,5.4,11.8,7.1,19,1.7,7.3,2.6,15,2.6,23.2s-.9,16-2.6,23.2c-1.7,7.3-4.1,13.6-7.1,19-3,5.4-6.5,9.7-10.5,12.9-4,3.1-8.3,4.7-12.8,4.7H29.7v.2Zm46.5-100.1H29.7v79.9h45.5c2.7,0,5.2-1.1,7.5-3.2,2.3-2.2,4.3-5.1,6-8.8,1.7-3.7,3-8,3.9-12.7.9-4.8,1.4-9.9,1.4-15.2s-.5-10.6-1.5-15.4c-1-4.8-2.3-9-4-12.7-1.7-3.6-3.6-6.5-5.7-8.6-2.1-2.1-4.3-3.2-6.6-3.2h0Z"
+                    style="fill: currentColor; stroke-width: 0px;"></path>
+                  <g>
+                    <path
+                      d="m179.9,148.5c-16.8,0-29.7-3.1-38.8-9.4-9.1-6.3-13.7-15.3-13.7-27.1s3.9-20.4,11.6-26.7c7.7-6.4,18.6-9.5,32.7-9.5s23.6,2.9,30.8,8.6c7.3,5.7,10.9,14.1,10.9,25s-.2,6.2-.6,9h-69v-10.7h51.7c0-6.3-2.1-11.2-6.3-14.5-4.2-3.4-10-5.1-17.4-5.1s-14.8,2-19.4,6.1c-4.6,4.1-6.9,9.8-6.9,17.2s3.2,14.3,9.5,18.5c6.3,4.2,15.3,6.4,27,6.4s8.1-.2,12.1-.5c4-.3,8-.8,12.1-1.4l2.4,12.3c-5.8.8-11.1,1.3-15.9,1.5-4.8.2-9.1.3-12.8.3Z"
+                      style="fill: currentColor; stroke-width: 0px;"></path>
+                    <path
+                      d="m236.5,147.2v-70.2h17.4l2.2,14.8v55.4h-19.7Zm36.9,0v-55c0-4-2.6-6-7.8-6s-9.5,3.2-9.5,9.5l-5.7-10.1h6.3c.7-6.7,6.4-10.1,16.9-10.1s9.2,1.3,12.1,3.8c2.9,2.5,4.4,6.3,4.4,11.5v56.3h-16.7Zm33.9,0v-53.6c0-4.9-2.5-7.3-7.6-7.3s-9.6,3.2-9.6,9.5l-6.7-10.1h7.6c.3-2.7,1.8-5.1,4.6-7.1,2.7-2,6.7-3,11.9-3s11.7,1.3,14.8,3.9c3.1,2.6,4.6,6.8,4.6,12.6v55h-19.7Z"
+                      style="fill: currentColor; stroke-width: 0px;"></path>
+                    <path
+                      d="m383.3,148.5c-10.3,0-18.3-2.2-24-6.6-5.7-4.4-8.5-10.6-8.5-18.6v-46.3h19.7v46.3c0,4,1.6,7.1,4.8,9.3,3.2,2.2,7.7,3.3,13.5,3.3s12.6-1.6,16.2-4.9c3.6-3.2,5.5-8.7,5.5-16.3l5,18.9h-6.5c-1.5,4.8-4.6,8.4-9.1,11-4.5,2.6-10.1,3.8-16.7,3.8Zm27.3-21.2v-50.3h19.7v46.3l-19.7,4Zm1.7,20.5l-1.7-16.8v-12.3h19.7v15.8l13.5,1.5v11.3l-31.5.7Z"
+                      style="fill: currentColor; stroke-width: 0px;"></path>
+                    <path
+                      d="m456,147.2v-11.5h65.6v11.5h-65.6Zm3.7-58.7v-11.5h32.8l1.9,11.5h-34.7Zm18.2,58.7v-70.2h15.9l3.7,20.1v50.1h-19.7Zm19.7-30.2l-5.7-22h7.6c1.1-12.9,10.1-19.3,27.1-19.3s17.5,2.1,22.1,6.2c4.6,4.1,6.9,10.9,6.9,20.1h-19.5c0-5.1-1.1-8.8-3.2-11.1-2.1-2.3-5.6-3.4-10.3-3.4-8.3,0-14.6,2.5-18.7,7.6-4.1,5.1-6.2,12.3-6.2,21.8Z"
+                      style="fill: currentColor; stroke-width: 0px;"></path>
+                    <path
+                      d="m601,148.5c-10.3,0-18.2-1.8-23.8-5.3-5.6-3.5-8.4-8.5-8.4-15s3.9-13.1,11.6-17.1c7.8-4,18.7-6,32.9-6s11.1.3,15.7.8c4.6.5,8.7,1.3,12.3,2.3l-4.1,9.5c-4.1-.7-8.2-1-12.1-1.2-4-.1-8-.2-12.1-.2-17.1,0-25.6,3.7-25.6,11.1s1.5,5.5,4.4,7.2c2.9,1.7,7.1,2.5,12.5,2.5s11.2-.8,15.3-2.3c4.1-1.5,7.2-3.4,9.2-5.8,2-2.3,3.1-4.7,3.1-7.2v-7.7l5.7,18h-7.8l3.2-2.1c0,4.1-1.3,7.4-3.9,10.2-2.6,2.7-6.3,4.7-11.1,6.1-4.8,1.3-10.4,2-16.9,2Zm34.7-.7l-1.3-20.8-2.6-5.8v-18.1c0-4.7-2.3-8.1-6.9-10.3-4.6-2.2-11.4-3.4-20.5-3.5l-23.5-.5,1.9-12.4,19.8.2c16.3.2,28.3,2.7,36.2,7.5s11.8,11.9,11.8,21.2v29.3l16.7,1.5v11.3l-31.5.7Z"
+                      style="fill: currentColor; stroke-width: 0px;"></path>
+                  </g>
+                </g>
               </g>
             </g>
-          </g>
-        </g>
-      </svg>
+          </svg>
+          <div
+            class="absolute top-2 left-2 w-full h-full border-[6px] border-p5-red pointer-events-none -z-10 mix-blend-screen"
+          >
+          </div>
+        </div>
+
+        <!-- Menu Links -->
+        <div class="menu-list flex flex-col gap-5 w-full max-w-sm items-center">
+          <button
+            data-nav-target="view-profile"
+            class="nav-btn p5-shadow relative block w-[90%] bg-p5-white text-p5-black font-display text-4xl py-3 px-6 border-[5px] border-p5-black transform origin-center uppercase text-center overflow-hidden group glitch-item ml-[-30px]"
+          >
+            <span
+              class="relative z-10 block transform -skew-x-12 group-hover:text-p5-white transition-colors duration-100"
+              >Profile</span
+            >
+            <div
+              class="absolute inset-0 bg-p5-red w-0 group-hover:w-full transition-all duration-300 ease-out z-0"
+            >
+            </div>
+          </button>
+
+          <button
+            data-nav-target="view-party"
+            class="nav-btn p5-shadow relative block w-[95%] bg-p5-white text-p5-black font-display text-4xl py-3 px-6 border-[5px] border-p5-black transform origin-center uppercase text-center overflow-hidden group glitch-item ml-[20px]"
+          >
+            <span
+              class="relative z-10 block transform -skew-x-12 group-hover:text-p5-white transition-colors duration-100"
+              >Personas</span
+            >
+            <div
+              class="absolute inset-0 bg-p5-red w-0 group-hover:w-full transition-all duration-300 ease-out z-0"
+            >
+            </div>
+          </button>
+
+          <button
+            data-nav-target="view-projects"
+            class="nav-btn p5-shadow relative block w-full bg-p5-white text-p5-black font-display text-5xl py-4 px-6 border-[5px] border-p5-black transform origin-center uppercase text-center overflow-hidden group glitch-item ml-[-10px]"
+          >
+            <span
+              class="relative z-10 block transform -skew-x-12 group-hover:text-p5-white transition-colors duration-100"
+              >Missions</span
+            >
+            <div
+              class="absolute inset-0 bg-p5-red w-0 group-hover:w-full transition-all duration-300 ease-out z-0"
+            >
+            </div>
+          </button>
+
+          <button
+            data-nav-target="view-contact"
+            class="nav-btn p5-shadow relative block w-[85%] bg-p5-white text-p5-black font-display text-3xl py-3 px-6 border-[5px] border-p5-black transform origin-center uppercase text-center overflow-hidden group glitch-item ml-[40px]"
+          >
+            <span
+              class="relative z-10 block transform -skew-x-12 group-hover:text-p5-white transition-colors duration-100"
+              >Connect</span
+            >
+            <div
+              class="absolute inset-0 bg-p5-red w-0 group-hover:w-full transition-all duration-300 ease-out z-0"
+            >
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- VIEW: PROFILE                                  -->
+      <!-- ============================================== -->
+      <div
+        id="view-profile"
+        class="page-view absolute inset-0 flex flex-col items-center justify-center w-full h-full opacity-0 pointer-events-none"
+        style="display:none;"
+      >
+        <div
+          class="bg-p5-white text-p5-black border-[10px] border-p5-black p-10 max-w-2xl transform skew-x-[-5deg] rotate-[2deg] shadow-[20px_20px_0px_#e60012] view-content"
+        >
+          <h2
+            class="font-display text-7xl uppercase mb-6 border-b-8 border-p5-red pb-2 inline-block"
+          >
+            Demura AI
+          </h2>
+          <p class="text-2xl font-bold font-sans">
+            Level 99 Phantom Thief / Developer
+          </p>
+          <ul class="text-xl mt-6 space-y-3 font-semibold">
+            <li
+              class="bg-p5-black text-p5-white px-4 py-2 transform -skew-x-12 inline-block"
+            >
+              Agility: Max
+            </li>
+            <li
+              class="bg-p5-red text-p5-white px-4 py-2 transform -skew-x-6 inline-block"
+            >
+              Tech Stack: Astro, TS, GSAP
+            </li>
+            <li
+              class="bg-p5-gray text-p5-white px-4 py-2 transform -skew-x-12 inline-block"
+            >
+              Status: Ready for heist
+            </li>
+          </ul>
+          <button
+            class="nav-btn mt-10 p5-shadow block bg-p5-black text-p5-white font-display text-3xl py-2 px-8 uppercase hover:bg-p5-red transition-colors"
+            data-nav-target="view-home">Back</button
+          >
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- VIEW: PERSONAS (SELECT CHAR LIKE)              -->
+      <!-- ============================================== -->
+      <div
+        id="view-party"
+        class="page-view absolute inset-0 flex flex-row items-center justify-center w-full h-full opacity-0 pointer-events-none"
+        style="display:none;"
+      >
+        <!-- Left: Roster List -->
+        <div class="flex flex-col gap-4 w-1/3 max-w-[320px] z-20">
+          <div
+            class="roster-item bg-p5-white text-p5-black border-[5px] border-p5-black p-4 transform -skew-x-12 cursor-pointer hover:bg-p5-red hover:text-p5-white transition-colors p5-shadow"
+          >
+            <h3 class="font-display text-4xl uppercase">The Architect</h3>
+            <p
+              class="font-sans font-black text-sm uppercase tracking-widest opacity-80"
+            >
+              Fullstack System
+            </p>
+          </div>
+          <div
+            class="roster-item bg-p5-black text-p5-white border-[5px] border-p5-red p-4 transform skew-x-6 cursor-pointer hover:bg-p5-red transition-colors p5-shadow ml-6"
+          >
+            <h3 class="font-display text-4xl uppercase">The Artist</h3>
+            <p
+              class="font-sans font-black text-sm uppercase tracking-widest opacity-80"
+            >
+              UX & Visuals
+            </p>
+          </div>
+          <div
+            class="roster-item bg-p5-gray text-p5-white border-[5px] border-p5-black p-4 transform -skew-x-6 cursor-pointer hover:bg-p5-red transition-colors p5-shadow ml-[-10px]"
+          >
+            <h3 class="font-display text-4xl uppercase">The Oracle</h3>
+            <p
+              class="font-sans font-black text-sm uppercase tracking-widest opacity-80"
+            >
+              AI Integration
+            </p>
+          </div>
+          <button
+            class="nav-btn mt-10 block p5-shadow bg-p5-white text-p5-black font-display text-2xl py-3 px-6 uppercase hover:bg-p5-red hover:text-p5-white transition-colors transform -skew-x-12 w-3/4 border-[4px] border-p5-black"
+            data-nav-target="view-home">Return</button
+          >
+        </div>
+
+        <!-- Right: Character Details Polygon Box -->
+        <div
+          class="roster-details relative w-[45%] h-[75vh] bg-p5-red border-[8px] border-p5-black transform skew-x-[4deg] shadow-[20px_20px_0px_#fff] flex items-center justify-center overflow-hidden ml-8"
+        >
+          <div
+            class="absolute right-[-15%] top-[-5%] text-[18rem] font-display text-p5-black opacity-10 uppercase transform -rotate-12 leading-none pointer-events-none"
+            style="writing-mode: vertical-rl;"
+          >
+            STATS
+          </div>
+
+          <div class="relative z-10 w-full p-8 flex flex-col gap-6">
+            <!-- Mock Radar Chart Shape -->
+            <div
+              class="w-48 h-48 bg-p5-black mx-auto shadow-[0_0_30px_rgba(255,255,255,0.7)]"
+              style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);"
+            >
+              <div
+                class="w-full h-full bg-p5-red transform scale-[0.6] opacity-80"
+                style="clip-path: polygon(50% 10%, 90% 60%, 75% 90%, 30% 80%, 10% 40%);"
+              >
+              </div>
+            </div>
+
+            <div
+              class="bg-p5-white text-p5-black p-6 transform -skew-x-6 border-l-[15px] border-p5-black shadow-xl"
+            >
+              <h2 class="font-display text-5xl uppercase mb-3 text-p5-red">
+                Techniques
+              </h2>
+              <div
+                class="grid grid-cols-2 gap-3 font-sans font-black text-sm uppercase"
+              >
+                <div
+                  class="bg-p5-gray text-white p-2 text-center transform skew-x-6 border-b-[4px] border-p5-red"
+                >
+                  TypeScript Strike
+                </div>
+                <div
+                  class="bg-p5-gray text-white p-2 text-center transform -skew-x-3 border-b-[4px] border-p5-white"
+                >
+                  React Barrier
+                </div>
+                <div
+                  class="bg-p5-gray text-white p-2 text-center transform skew-x-3 border-b-[4px] border-p5-white"
+                >
+                  Tailwind Shell
+                </div>
+                <div
+                  class="bg-p5-red text-white p-2 text-center transform -skew-x-6 border-b-[4px] border-p5-black"
+                >
+                  Astro Burst
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- VIEW: MISSIONS (PROJECTS)                      -->
+      <!-- ============================================== -->
+      <div
+        id="view-projects"
+        class="page-view absolute inset-0 flex flex-col items-center justify-center w-full h-full opacity-0 pointer-events-none"
+        style="display:none;"
+      >
+        <div
+          class="bg-p5-black text-p5-white border-[10px] border-p5-red p-8 w-full max-w-4xl transform skew-x-[3deg] shadow-[15px_15px_0px_#fff] view-content max-h-[80vh] overflow-y-auto overflow-x-hidden"
+        >
+          <h2
+            class="font-display text-8xl uppercase mb-2 text-p5-red shadow-black drop-shadow-[5px_5px_0_black] glitch-item"
+          >
+            <span>Missions</span>
+          </h2>
+          <div class="flex flex-col gap-4 mt-8">
+            <div
+              class="p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors group cursor-pointer p5-shadow relative block overflow-hidden transform -skew-x-6"
+            >
+              <h3
+                class="font-display text-4xl transform transition-transform group-hover:scale-105 origin-left"
+              >
+                Target: Cyber Core
+              </h3>
+              <p class="font-sans font-bold opacity-80">
+                Steal the heavily guarded database.
+              </p>
+            </div>
+            <div
+              class="p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors group cursor-pointer p5-shadow relative block overflow-hidden transform skew-x-3"
+            >
+              <h3
+                class="font-display text-4xl transform transition-transform group-hover:scale-105 origin-left"
+              >
+                Target: UI Overhaul
+              </h3>
+              <p class="font-sans font-bold opacity-80">
+                Rewrite the perception of reality.
+              </p>
+            </div>
+            <div
+              class="p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors group cursor-pointer p5-shadow relative block overflow-hidden transform -skew-x-3"
+            >
+              <h3
+                class="font-display text-4xl transform transition-transform group-hover:scale-105 origin-left"
+              >
+                Target: The Eternal Log
+              </h3>
+              <p class="font-sans font-bold opacity-80">
+                Dive back into the Mementos archives.
+              </p>
+            </div>
+          </div>
+          <button
+            class="nav-btn mt-8 block p5-shadow bg-p5-white text-p5-black font-display text-3xl py-2 px-8 uppercase hover:bg-p5-red hover:text-p5-white transition-colors"
+            data-nav-target="view-home">Retreat</button
+          >
+        </div>
+      </div>
+
+      <!-- ============================================== -->
+      <!-- VIEW: CONTACT                                  -->
+      <!-- ============================================== -->
+      <div
+        id="view-contact"
+        class="page-view absolute inset-0 flex flex-col items-center justify-center w-full h-full opacity-0 pointer-events-none"
+        style="display:none;"
+      >
+        <div
+          class="bg-p5-red text-p5-white border-8 border-p5-white p-10 max-w-lg transform -rotate-3 skew-y-2 shadow-[20px_-20px_0px_#111] view-content text-center"
+        >
+          <h2
+            class="font-display text-7xl uppercase mb-6 italic drop-shadow-xl"
+          >
+            Call Card
+          </h2>
+          <p
+            class="text-3xl font-sans font-black mb-8 bg-p5-black p-4 transform skew-x-[-10deg]"
+          >
+            We will take your heart.
+          </p>
+          <a
+            href="mailto:ghost@demura.ai"
+            class="inline-block p5-shadow bg-p5-white text-p5-black font-display text-4xl py-4 px-10 uppercase hover:bg-p5-black hover:text-p5-white transition-colors skew-x-6"
+            >Send Request</a
+          >
+          <div class="mt-12">
+            <button
+              class="nav-btn p5-shadow bg-p5-black text-p5-white font-display text-2xl py-2 px-6 uppercase"
+              data-nav-target="view-home">Back to Hideout</button
+            >
+          </div>
+        </div>
+      </div>
     </div>
-    <a
-      href="/log"
-      class="text-lg tracking-wide glow-effect glitch-item"
-      id="log-button">The Eternal Projects</a
-    >
   </div>
 </Layout>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const glitchItems = document.querySelectorAll(".glitch-item");
+  import gsap from "gsap";
+
+  let destroyListeners: (() => void)[] = [];
+
+  document.addEventListener("astro:page-load", () => {
+    destroyListeners.forEach((destroy) => destroy());
+    destroyListeners = [];
+
+    const cameraRig = document.getElementById("camera-rig");
+    const floatingShapes =
+      document.querySelectorAll<HTMLElement>(".floating-shape");
+    const redBg = document.getElementById("red-angle-bg");
+
+    // --- 1. Dynamic Parallax Mouse Tracking ---
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const xPos = e.clientX / innerWidth - 0.5;
+      const yPos = e.clientY / innerHeight - 0.5;
+
+      if (cameraRig) {
+        gsap.to(cameraRig, {
+          duration: 0.5,
+          rotationY: xPos * 30,
+          rotationX: yPos * -30,
+          transformPerspective: 1500,
+          transformOrigin: "center center",
+          ease: "power1.out",
+        });
+      }
+
+      floatingShapes.forEach((shape) => {
+        const speed = parseFloat(shape.getAttribute("data-speed") || "1");
+        gsap.to(shape, {
+          duration: 0.8,
+          x: xPos * 80 * speed,
+          y: yPos * 80 * speed,
+          rotation: xPos * 25,
+          ease: "power1.out",
+        });
+      });
+
+      if (redBg) {
+        gsap.to(redBg, {
+          duration: 1,
+          x: xPos * -50,
+          y: yPos * -50,
+          rotation: -6 + xPos * 6,
+          ease: "power1.out",
+        });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    destroyListeners.push(() =>
+      window.removeEventListener("mousemove", handleMouseMove),
+    );
+
+    // --- 2. Initial Staggered 3D Burst Load Animation ---
+    const tl = gsap.timeline();
+
+    gsap.set(".logo-container", {
+      z: -1000,
+      y: 300,
+      opacity: 0,
+      rotationX: 120,
+      rotationY: 45,
+      scale: 0.2,
+      skewX: 0,
+    });
+    gsap.set(".menu-list button", {
+      x: "-120%",
+      z: 200,
+      opacity: 0,
+      skewX: 45,
+      rotationZ: 10,
+    });
+    gsap.set("#red-angle-bg", { scaleY: 0, transformOrigin: "0% 0%" });
+    gsap.set(".floating-shape", { scale: 0, rotation: -180, opacity: 0 });
+
+    tl.to("#red-angle-bg", {
+      scaleY: 1,
+      duration: 0.7,
+      ease: "expo.out",
+    })
+      .to(
+        ".logo-container",
+        {
+          z: 50,
+          y: 0,
+          opacity: 1,
+          rotationX: 0,
+          rotationY: 0,
+          scale: 1,
+          skewX: -8,
+          duration: 1.2,
+          ease: "elastic.out(1, 0.4)",
+        },
+        "-=0.2",
+      )
+      .to(
+        ".menu-list button",
+        {
+          x: "0%",
+          z: 0,
+          opacity: 1,
+          skewX: 0,
+          rotationZ: 0,
+          stagger: 0.1,
+          duration: 0.7,
+          ease: "back.out(1.5)",
+        },
+        "-=0.9",
+      )
+      .to(
+        ".floating-shape",
+        {
+          scale: 1,
+          rotation: 0,
+          opacity: 1,
+          duration: 1.5,
+          stagger: 0.15,
+          ease: "elastic.out(1.2, 0.4)",
+        },
+        "-=1.0",
+      );
+
+    // --- 3. DYNAMIC MULTI-TRANSITION ROUTER ---
+    let isTransitioning = false;
+    const navButtons = document.querySelectorAll(".nav-btn");
+
+    navButtons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const targetId = btn.getAttribute("data-nav-target");
+        if (!targetId) return;
+
+        const currentActiveView = Array.from(
+          document.querySelectorAll(".page-view"),
+        ).find((el) => window.getComputedStyle(el).display !== "none");
+        const targetView = document.getElementById(targetId);
+
+        if (
+          !currentActiveView ||
+          !targetView ||
+          currentActiveView.id === targetId
+        ) {
+          isTransitioning = false;
+          return;
+        }
+
+        const transTl = gsap.timeline({
+          onComplete: () => {
+            isTransitioning = false;
+          },
+        });
+
+        // Universal P5 Hit impact (Camera Shake and Screen Flash)
+        transTl
+          .to("#scene-container", {
+            x: () => gsap.utils.random(-35, 35),
+            y: () => gsap.utils.random(-35, 35),
+            duration: 0.05,
+            yoyo: true,
+            repeat: 5,
+          })
+          .to(
+            "#flash-overlay",
+            {
+              opacity: 0.9,
+              duration: 0.05,
+              yoyo: true,
+              repeat: 1,
+            },
+            0,
+          );
+
+        // Core View Swapping Logic
+        const targetElements = targetView.querySelectorAll(
+          ".view-content, .logo-container, .nav-btn, .menu-list button, .roster-item, .roster-details",
+        );
+        const swapViews = () => {
+          gsap.set(currentActiveView, {
+            display: "none",
+            opacity: 0,
+            pointerEvents: "none",
+          });
+          gsap.set(targetView, {
+            display: "flex",
+            opacity: 1,
+            pointerEvents: "auto",
+          });
+        };
+
+        // --- UNIQUE TRANSITION BRANCHING ---
+        switch (targetId) {
+          case "view-party": // NEW: Selection Character Screen
+            // Prep the Party view
+            gsap.set(targetElements, {
+              opacity: 0,
+              scale: 0.5,
+              rotationZ: 15,
+              x: 200,
+              skewX: 20,
+              z: -400,
+            });
+
+            // 1. Starburst/Shatter effect IN
+            transTl
+              .to(
+                ".shatter-piece",
+                {
+                  scale: 3,
+                  duration: 0.45,
+                  stagger: 0.05,
+                  ease: "power4.inOut",
+                },
+                0.1,
+              )
+              // Swap!
+              .add(swapViews, 0.45)
+              // 2. Starburst Shatter OUT
+              .to(
+                ".shatter-piece",
+                { scale: 0, opacity: 0, duration: 0.35, ease: "power3.in" },
+                0.5,
+              )
+              .set(".shatter-piece", { opacity: 1, scale: 0 }, "+=0.1")
+
+              // 3. Enter left list
+              .to(
+                targetView.querySelectorAll(".roster-item, .nav-btn"),
+                {
+                  opacity: 1,
+                  x: 0,
+                  scale: 1,
+                  rotationZ: 0,
+                  skewX: 0,
+                  z: 0,
+                  stagger: 0.1,
+                  duration: 0.6,
+                  ease: "back.out(2)",
+                },
+                0.6,
+              )
+              // 4. Enter right polygon details
+              .to(
+                ".roster-details",
+                {
+                  opacity: 1,
+                  x: 0,
+                  scale: 1,
+                  rotationZ: 0,
+                  skewX: 0,
+                  z: 0,
+                  duration: 0.8,
+                  ease: "elastic.out(1, 0.6)",
+                },
+                0.7,
+              );
+            break;
+
+          case "view-projects":
+            gsap.set(targetElements, {
+              opacity: 0,
+              z: -600,
+              scale: 0.4,
+              rotationX: 60,
+              y: 200,
+              skewX: 0,
+            });
+
+            // 1. The Slash Enter
+            transTl
+              .set(".slash-bg", { opacity: 1 }, 0)
+              .to(".slash-bg", { opacity: 0, duration: 0.1 }, 0.1)
+              .to(
+                ".slice-block, .slice-block-shadow",
+                { y: "0%", duration: 0.35, ease: "power4.inOut" },
+                0.1,
+              )
+              .set(".slice-text", { display: "block" }, 0.25)
+              .to(
+                ".slice-text",
+                { opacity: 1, scale: 1.2, duration: 0.2, ease: "bounce.out" },
+                0.25,
+              )
+              // Swap!
+              .add(swapViews, 0.45)
+              // 2. The Slash Exit
+              .to(
+                ".slice-text",
+                { opacity: 0, scale: 0.5, duration: 0.15, ease: "power3.in" },
+                0.55,
+              )
+              .set(".slice-text", { display: "none" }, 0.7)
+              .to(
+                ".slice-block",
+                { y: "150%", duration: 0.4, ease: "power4.inOut" },
+                0.65,
+              )
+              .to(
+                ".slice-block-shadow",
+                { y: "150%", duration: 0.45, ease: "power4.inOut" },
+                0.65,
+              )
+              // 3. Projects View Boom Enter
+              .to(
+                targetElements,
+                {
+                  opacity: 1,
+                  z: 0,
+                  scale: 1,
+                  rotationX: 0,
+                  y: 0,
+                  stagger: 0.1,
+                  duration: 0.8,
+                  ease: "elastic.out(1, 0.6)",
+                },
+                0.7,
+              )
+              .set(".slice-block", { y: "-150%" }, "+=0.1");
+            break;
+
+          case "view-profile":
+            gsap.set(targetElements, {
+              opacity: 0,
+              x: -400,
+              skewX: 30,
+              scale: 0.8,
+              rotationY: 0,
+            });
+
+            // 1. Shutters close (slam horizontally)
+            transTl
+              .to(
+                ".shutter-top",
+                { x: "-10%", duration: 0.35, ease: "power4.out" },
+                0.1,
+              )
+              .to(
+                ".shutter-bottom",
+                { x: "10%", duration: 0.35, ease: "power4.out" },
+                0.1,
+              )
+              // Swap!
+              .add(swapViews, 0.45)
+              // 2. Shutters open (slide away vertically)
+              .to(
+                ".shutter-top",
+                { y: "-150%", duration: 0.45, ease: "expo.inOut" },
+                0.45,
+              )
+              .to(
+                ".shutter-bottom",
+                { y: "150%", duration: 0.45, ease: "expo.inOut" },
+                0.45,
+              )
+              // 3. Profile view slide-snap in
+              .to(
+                targetElements,
+                {
+                  opacity: 1,
+                  x: 0,
+                  skewX: 0,
+                  scale: 1,
+                  stagger: 0.1,
+                  duration: 0.7,
+                  ease: "back.out(1.4)",
+                },
+                0.55,
+              )
+              // reset shutters to base Tailwind classes
+              .set(
+                ".shutter-top, .shutter-bottom",
+                { clearProps: "transform" },
+                "+=0.1",
+              );
+            break;
+
+          case "view-contact":
+            gsap.set(targetElements, {
+              opacity: 0,
+              rotationZ: -45, // more aggressive angle
+              scale: 0.5,
+              z: -500,
+              y: 200,
+              x: -100,
+            });
+
+            // 1. Expanding Calling Card graphic
+            transTl
+              .to(
+                ".contact-bg",
+                { opacity: 1, duration: 0.15, ease: "power2.in" },
+                0,
+              )
+              .to(
+                ".contact-circle",
+                {
+                  scale: 2,
+                  rotation: 135,
+                  duration: 0.5,
+                  ease: "power4.inOut",
+                }, // Smooth spin scaling in
+                0.05,
+              )
+              .to(
+                ".contact-text",
+                { opacity: 1, scale: 1.5, duration: 0.3, ease: "back.out(2)" }, // Pop out text
+                0.25,
+              )
+              // Swap!
+              .add(swapViews, 0.6)
+              // 2. Shrinking back
+              .to(".contact-bg", { opacity: 0, duration: 0.3 }, 0.65)
+              .to(
+                ".contact-text",
+                { opacity: 0, scale: 0.5, duration: 0.2 },
+                0.65,
+              )
+              .to(
+                ".contact-circle",
+                { scale: 0, rotation: 225, duration: 0.5, ease: "expo.in" }, // Smooth spin scaling out
+                0.65,
+              )
+              // 3. Spin down drop-in
+              .to(
+                targetElements,
+                {
+                  opacity: 1,
+                  rotationZ: 0,
+                  scale: 1,
+                  z: 0,
+                  x: 0,
+                  y: 0,
+                  stagger: 0.1,
+                  duration: 0.8,
+                  ease: "elastic.out(1, 0.5)",
+                },
+                0.75,
+              );
+            break;
+
+          case "view-home":
+            gsap.set(targetElements, {
+              opacity: 0,
+              y: -400,
+              rotationX: -60,
+              scale: 0.8,
+              x: 0,
+              skewX: 0,
+              z: 0,
+            });
+
+            // 1. Screen tearing
+            transTl
+              .to(
+                ".glitch-stripe",
+                { y: "0%", stagger: 0.05, duration: 0.25, ease: "power2.out" },
+                0.1,
+              )
+              // Swap!
+              .add(swapViews, 0.4)
+              // 2. Tear away alternating
+              .to(
+                ".glitch-stripe",
+                {
+                  y: (i) => (i % 2 === 0 ? "100%" : "-100%"),
+                  stagger: 0.05,
+                  duration: 0.35,
+                  ease: "power3.in",
+                },
+                0.5,
+              )
+              // 3. Fall into place
+              .to(
+                targetElements,
+                {
+                  opacity: 1,
+                  y: 0,
+                  rotationX: 0,
+                  scale: 1,
+                  stagger: 0.08,
+                  duration: 0.8,
+                  ease: "back.out(1.5)",
+                },
+                0.6,
+              )
+              // reset tears
+              .set(
+                ".glitch-stripe",
+                { y: (i) => (i % 2 === 0 ? "-100%" : "100%") },
+                "+=0.1",
+              );
+            break;
+        }
+      });
+    });
+
+    // --- 4. Glitch Effect Hover ---
+    const glitchItems = document.querySelectorAll(
+      ".glitch-item span, .glitch-item",
+    );
     const possibleChars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789/;[]=-~!@#$%^&*()+{}:?><€¡¥×«»¶¿çµñ©æáßðøöóíúüþéåä";
 
     glitchItems.forEach((item) => {
+      if (item.tagName !== "SPAN") return;
       const originalText = item.textContent ? item.textContent.trim() : "";
       let timeouts: (number | undefined)[] = [];
 
-      item.addEventListener("mouseenter", () => {
+      const parentNode = item.closest(".glitch-item");
+      parentNode?.addEventListener("mouseenter", () => {
         const charArr = originalText.split("");
-        const strength = Math.ceil(charArr.length / 5); // Set glitch strength as 20%
+        const strength = Math.ceil(charArr.length / 4);
 
-        const times = 10 * (500 / 1000); // Glitch speed: 10 per second, 500ms duration
+        const times = 10 * (400 / 1000);
         for (let i = 0; i < times; i++) {
-          const speed = 1000 / 10; // Glitch speed in ms
+          const speed = 1000 / 12;
           timeouts.push(
             setTimeout(() => {
               for (let j = 0; j < strength; j++) {
@@ -91,24 +1088,19 @@ import Layout from "../layouts/Layout.astro";
             }, i * speed),
           );
         }
+        timeouts.push(
+          setTimeout(
+            () => {
+              item.textContent = originalText;
+            },
+            times * (1000 / 12),
+          ),
+        );
       });
 
-      item.addEventListener("mouseleave", () => {
-        timeouts.forEach(clearTimeout);
-        let charArr = item.textContent ? item.textContent.trim().split("") : [];
-        const interval = setInterval(() => {
-          if (charArr.join("") === originalText) {
-            clearInterval(interval);
-          } else {
-            for (let i = 0; i < charArr.length; i++) {
-              if (charArr[i] !== originalText[i]) {
-                charArr[i] = originalText[i];
-                break;
-              }
-            }
-            item.textContent = charArr.join("");
-          }
-        }, 50); // Smoother transition with a shorter interval
+      parentNode?.addEventListener("mouseleave", () => {
+        timeouts.forEach((t) => clearTimeout(t));
+        item.textContent = originalText;
       });
     });
   });
