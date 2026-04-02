@@ -28,7 +28,10 @@ const { title } = Astro.props;
       <slot />
     </main>
 
-    <audio id="background-music" src="/music.wav" loop transition:persist
+    <!-- Audio Visualizer Canvas -->
+    <canvas id="audio-visualizer" class="fixed bottom-0 left-0 w-full h-32 pointer-events-none z-50 opacity-80" transition:persist></canvas>
+
+    <audio id="background-music" crossorigin="anonymous" src="/music.wav" loop transition:persist
     ></audio>
     <Footer />
 
@@ -36,20 +39,107 @@ const { title } = Astro.props;
     <script>
       import gsap from "gsap";
 
-      // Audio Logic
-      window.addEventListener("DOMContentLoaded", function () {
+      // Audio Logic & Visualizer
+      let audioContext: AudioContext | null = null;
+      let analyser: AnalyserNode | null = null;
+      let dataArray: Uint8Array | any = null;
+      let isInitialized = false;
+
+      function initAudio() {
+        if (isInitialized) return;
         const audio = document.getElementById(
           "background-music",
         ) as HTMLAudioElement;
         if (!audio) return;
-        const playAudio = () => {
-          audio.play().catch(() => {});
+
+        // Initialize Web Audio API
+        const Ctx = window.AudioContext || (window as any).webkitAudioContext;
+        if (Ctx) {
+          audioContext = new Ctx();
+          analyser = audioContext.createAnalyser();
+          const source = audioContext.createMediaElementSource(audio);
+
+          source.connect(analyser);
+          analyser.connect(audioContext.destination);
+
+          analyser.fftSize = 64; // Small fft size for blocky P5 look
+          const bufferLength = analyser.frequencyBinCount;
+          dataArray = new Uint8Array(bufferLength);
+        }
+
+        audio.play().catch(() => {});
+        isInitialized = true;
+
+        // Start visualization loop
+        drawVisualizer();
+      }
+
+      function drawVisualizer() {
+        const canvas = document.getElementById("audio-visualizer") as HTMLCanvasElement;
+        if (!canvas || !analyser || !dataArray) return;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        // Resize canvas to match display size
+        canvas.width = window.innerWidth;
+        canvas.height = canvas.clientHeight;
+
+        requestAnimationFrame(drawVisualizer);
+
+        analyser.getByteFrequencyData(dataArray);
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // P5 Theme Colors
+        const barColor = "#e50000"; // P5 Red
+        const shadowColor = "#000000"; // Black
+        const highlightColor = "#ffffff"; // White
+
+        const barWidth = (canvas.width / dataArray.length) * 1.5;
+        let x = 0;
+
+        for (let i = 0; i < dataArray.length; i++) {
+          const rawHeight = dataArray[i];
+          const barHeight = (rawHeight / 255) * canvas.height;
+
+          // Draw skewed bars for P5 style
+          ctx.save();
+          ctx.translate(x + barWidth / 2, canvas.height);
+
+          // Slight skew
+          ctx.transform(1, 0, -0.2, 1, 0, 0);
+
+          // Black Shadow
+          ctx.fillStyle = shadowColor;
+          ctx.fillRect(-barWidth / 2 + 4, -barHeight + 4, barWidth - 4, barHeight);
+
+          // Red Bar
+          ctx.fillStyle = barColor;
+          ctx.fillRect(-barWidth / 2, -barHeight, barWidth - 4, barHeight);
+
+          // White Highlight (Top Edge)
+          if (barHeight > 10) {
+            ctx.fillStyle = highlightColor;
+            ctx.fillRect(-barWidth / 2, -barHeight, barWidth - 4, 4);
+          }
+
+          ctx.restore();
+
+          x += barWidth;
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        const playAudioHandler = () => {
+          initAudio();
           ["click", "keydown", "touchstart"].forEach((e) =>
-            window.removeEventListener(e, playAudio),
+            window.removeEventListener(e, playAudioHandler),
           );
         };
+
         ["click", "keydown", "touchstart"].forEach((e) =>
-          window.addEventListener(e, playAudio),
+          window.addEventListener(e, playAudioHandler),
         );
       });
 
