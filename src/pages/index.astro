@@ -77,18 +77,24 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
 
-    <!-- 2. The Shutters (Used for Profile) -->
+    <!-- 2. Diagonal Wipe (Used for Profile) -->
     <div
-      id="trans-shutters"
-      class="absolute inset-0 flex flex-col pointer-events-none"
+      id="trans-profile"
+      class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[9999]"
     >
       <div
-        class="shutter-top w-[120%] h-[60%] bg-p5-red border-b-[40px] border-p5-black transform -translate-x-full -translate-y-10 rotate-[-5deg] drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)] z-10"
+        class="profile-slice-top absolute w-[200%] h-[150%] bg-p5-red transform origin-bottom-left -translate-y-[150%] rotate-[-25deg] shadow-[0_0_80px_rgba(0,0,0,1)] border-b-[60px] border-p5-black z-10"
       >
       </div>
       <div
-        class="shutter-bottom w-[120%] h-[60%] bg-p5-black border-t-[40px] border-p5-red transform translate-x-full translate-y-10 rotate-[-5deg] drop-shadow-[0_-20px_40px_rgba(0,0,0,0.9)]"
+        class="profile-slice-bottom absolute w-[200%] h-[150%] bg-p5-black transform origin-top-right translate-y-[150%] rotate-[-25deg] shadow-[0_0_80px_rgba(230,0,18,0.8)] border-t-[60px] border-p5-red z-10"
       >
+      </div>
+
+      <div
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-p5-white font-display text-9xl tracking-widest uppercase opacity-0 profile-text skew-x-[-15deg] whitespace-nowrap hidden z-20 mix-blend-difference drop-shadow-[5px_5px_0_rgba(230,0,18,1)]"
+      >
+        STATUS
       </div>
     </div>
 
@@ -139,36 +145,29 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
 
-    <!-- 5. Shattered Glass/Starburst (Used for Personas) -->
+    <!-- 5. Jagged Summon Wipe (Used for Personas) -->
     <div
       id="trans-party"
       class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[9999]"
     >
-      <!-- Inner splinters -->
+      <div class="absolute inset-0 bg-p5-white opacity-0 summon-flash z-0"></div>
+
+      <!-- Jagged center spin -->
       <div
-        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-black origin-center"
-        style="clip-path: polygon(50% 50%, 100% -20%, 120% 50%); transform: scale(0);"
+        class="summon-star absolute w-[150vw] h-[150vw] sm:w-[100vw] sm:h-[100vw] bg-p5-black border-[30px] border-p5-red origin-center z-10"
+        style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); transform: scale(0) rotate(0deg);"
       >
       </div>
       <div
-        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-red origin-center"
-        style="clip-path: polygon(50% 50%, 120% 50%, 80% 120%); transform: scale(0);"
+        class="summon-star-inner absolute w-[150vw] h-[150vw] sm:w-[100vw] sm:h-[100vw] bg-p5-red origin-center z-10 mix-blend-screen"
+        style="clip-path: polygon(50% 10%, 58% 40%, 90% 40%, 64% 58%, 73% 85%, 50% 68%, 27% 85%, 36% 58%, 10% 40%, 42% 40%); transform: scale(0) rotate(45deg);"
       >
       </div>
+
       <div
-        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-white origin-center"
-        style="clip-path: polygon(50% 50%, 80% 120%, -20% 100%); transform: scale(0);"
+        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-p5-white font-display text-9xl tracking-widest uppercase opacity-0 summon-text skew-x-[-15deg] whitespace-nowrap hidden z-20 mix-blend-difference drop-shadow-[5px_5px_0_rgba(230,0,18,1)]"
       >
-      </div>
-      <div
-        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-black origin-center"
-        style="clip-path: polygon(50% 50%, -20% 100%, -20% -20%); transform: scale(0);"
-      >
-      </div>
-      <div
-        class="shatter-piece absolute w-[200%] h-[200%] bg-p5-red origin-center"
-        style="clip-path: polygon(50% 50%, -20% -20%, 100% -20%); transform: scale(0);"
-      >
+        PERSONA
       </div>
     </div>
   </div>
@@ -921,8 +920,7 @@ import Layout from "../layouts/Layout.astro";
 
         // --- UNIQUE TRANSITION BRANCHING ---
         switch (targetId) {
-          case "view-party": // NEW: Selection Character Screen
-            // Prep the Party view
+          case "view-party": // Selection Character Screen
             gsap.set(targetElements, {
               opacity: 0,
               scale: 0.5,
@@ -932,27 +930,45 @@ import Layout from "../layouts/Layout.astro";
               z: -400,
             });
 
-            // 1. Starburst/Shatter effect IN
+            // 1. Jagged Summon Wipe In
             transTl
+              .set(".summon-flash", { opacity: 1 }, 0)
+              .to(".summon-flash", { opacity: 0, duration: 0.1 }, 0.1)
               .to(
-                ".shatter-piece",
-                {
-                  scale: 3,
-                  duration: 0.45,
-                  stagger: 0.05,
-                  ease: "power4.inOut",
-                },
-                0.1,
+                ".summon-star",
+                { scale: 2, rotation: 90, duration: 0.4, ease: "power4.inOut" },
+                0.1
+              )
+              .to(
+                ".summon-star-inner",
+                { scale: 2.2, rotation: -90, duration: 0.45, ease: "power4.inOut" },
+                0.1
+              )
+              .set(".summon-text", { display: "block" }, 0.25)
+              .to(
+                ".summon-text",
+                { opacity: 1, scale: 1.5, duration: 0.2, ease: "bounce.out" },
+                0.25
               )
               // Swap!
-              .add(swapViews, 0.45)
-              // 2. Starburst Shatter OUT
+              .add(swapViews, 0.5)
+              // 2. Jagged Summon Wipe Out
               .to(
-                ".shatter-piece",
-                { scale: 0, opacity: 0, duration: 0.35, ease: "power3.in" },
-                0.5,
+                ".summon-text",
+                { opacity: 0, scale: 0.5, duration: 0.15, ease: "power3.in" },
+                0.6
               )
-              .set(".shatter-piece", { opacity: 1, scale: 0 }, "+=0.1")
+              .set(".summon-text", { display: "none" }, 0.75)
+              .to(
+                ".summon-star",
+                { scale: 0, rotation: 180, duration: 0.4, ease: "power4.inOut" },
+                0.65
+              )
+              .to(
+                ".summon-star-inner",
+                { scale: 0, rotation: -180, duration: 0.45, ease: "power4.inOut" },
+                0.65
+              )
 
               // 3. Enter left list
               .to(
@@ -968,7 +984,7 @@ import Layout from "../layouts/Layout.astro";
                   duration: 0.6,
                   ease: "back.out(2)",
                 },
-                0.6,
+                0.8,
               )
               // 4. Enter right polygon details
               .to(
@@ -983,7 +999,7 @@ import Layout from "../layouts/Layout.astro";
                   duration: 0.8,
                   ease: "elastic.out(1, 0.6)",
                 },
-                0.7,
+                0.9,
               );
             break;
 
@@ -1058,30 +1074,42 @@ import Layout from "../layouts/Layout.astro";
               rotationY: 0,
             });
 
-            // 1. Shutters close (slam horizontally)
+            // 1. Diagonal Wipe Enter
             transTl
               .to(
-                ".shutter-top",
-                { x: "-10%", duration: 0.35, ease: "power4.out" },
+                ".profile-slice-top",
+                { y: "0%", duration: 0.35, ease: "power4.inOut" },
                 0.1,
               )
               .to(
-                ".shutter-bottom",
-                { x: "10%", duration: 0.35, ease: "power4.out" },
+                ".profile-slice-bottom",
+                { y: "0%", duration: 0.35, ease: "power4.inOut" },
                 0.1,
+              )
+              .set(".profile-text", { display: "block" }, 0.25)
+              .to(
+                ".profile-text",
+                { opacity: 1, scale: 1.2, duration: 0.2, ease: "bounce.out" },
+                0.25,
               )
               // Swap!
               .add(swapViews, 0.45)
-              // 2. Shutters open (slide away vertically)
+              // 2. Diagonal Wipe Exit
               .to(
-                ".shutter-top",
-                { y: "-150%", duration: 0.45, ease: "expo.inOut" },
-                0.45,
+                ".profile-text",
+                { opacity: 0, scale: 0.5, duration: 0.15, ease: "power3.in" },
+                0.55,
+              )
+              .set(".profile-text", { display: "none" }, 0.7)
+              .to(
+                ".profile-slice-top",
+                { y: "-150%", duration: 0.4, ease: "power4.inOut" },
+                0.65,
               )
               .to(
-                ".shutter-bottom",
-                { y: "150%", duration: 0.45, ease: "expo.inOut" },
-                0.45,
+                ".profile-slice-bottom",
+                { y: "150%", duration: 0.4, ease: "power4.inOut" },
+                0.65,
               )
               // 3. Profile view slide-snap in
               .to(
@@ -1095,13 +1123,7 @@ import Layout from "../layouts/Layout.astro";
                   duration: 0.7,
                   ease: "back.out(1.4)",
                 },
-                0.55,
-              )
-              // reset shutters to base Tailwind classes
-              .set(
-                ".shutter-top, .shutter-bottom",
-                { clearProps: "transform" },
-                "+=0.1",
+                0.6,
               );
             break;
 
