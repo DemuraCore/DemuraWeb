@@ -310,41 +310,99 @@ import Layout from "../layouts/Layout.astro";
       <!-- ============================================== -->
       <div
         id="view-profile"
-        class="page-view absolute inset-0 flex flex-col items-center justify-center w-full h-full opacity-0 pointer-events-none"
+        class="page-view absolute inset-0 flex flex-row items-center justify-center w-full h-full opacity-0 pointer-events-none"
         style="display:none;"
       >
-        <div
-          class="bg-p5-white text-p5-black border-[10px] border-p5-black p-10 max-w-2xl transform skew-x-[-5deg] rotate-[2deg] shadow-[20px_20px_0px_#e60012] view-content"
-        >
-          <h2
-            class="font-display text-7xl uppercase mb-6 border-b-8 border-p5-red pb-2 inline-block"
+        <!-- Left: Profile Menu -->
+        <div class="flex flex-col gap-4 w-1/3 max-w-[320px] z-20">
+          <div
+            class="profile-menu-item active bg-p5-red text-p5-white border-[5px] border-p5-black p-4 transform -skew-x-12 cursor-pointer hover:bg-p5-black hover:text-p5-white transition-colors p5-shadow"
+            data-target="profile-identity"
           >
-            Demura AI
-          </h2>
-          <p class="text-2xl font-bold font-sans">
-            Level 99 Phantom Thief / Developer
-          </p>
-          <ul class="text-xl mt-6 space-y-3 font-semibold">
-            <li
-              class="bg-p5-black text-p5-white px-4 py-2 transform -skew-x-12 inline-block"
-            >
-              Agility: Max
-            </li>
-            <li
-              class="bg-p5-red text-p5-white px-4 py-2 transform -skew-x-6 inline-block"
-            >
-              Tech Stack: Astro, TS, GSAP
-            </li>
-            <li
-              class="bg-p5-gray text-p5-white px-4 py-2 transform -skew-x-12 inline-block"
-            >
-              Status: Ready for heist
-            </li>
-          </ul>
+            <h3 class="font-display text-4xl uppercase">Identity</h3>
+          </div>
+          <div
+            class="profile-menu-item bg-p5-white text-p5-black border-[5px] border-p5-black p-4 transform skew-x-6 cursor-pointer hover:bg-p5-red hover:text-p5-white transition-colors p5-shadow ml-6"
+            data-target="profile-stats"
+          >
+            <h3 class="font-display text-4xl uppercase">Stats</h3>
+          </div>
+          <div
+            class="profile-menu-item bg-p5-white text-p5-black border-[5px] border-p5-black p-4 transform -skew-x-6 cursor-pointer hover:bg-p5-red hover:text-p5-white transition-colors p5-shadow ml-[-10px]"
+            data-target="profile-skills"
+          >
+            <h3 class="font-display text-4xl uppercase">Skills</h3>
+          </div>
           <button
-            class="nav-btn mt-10 p5-shadow block bg-p5-black text-p5-white font-display text-3xl py-2 px-8 uppercase hover:bg-p5-red transition-colors"
-            data-nav-target="view-home">Back</button
+            class="nav-btn mt-10 block p5-shadow bg-p5-black text-p5-white font-display text-2xl py-3 px-6 uppercase hover:bg-p5-red hover:text-p5-white transition-colors transform -skew-x-12 w-3/4 border-[4px] border-p5-black"
+            data-nav-target="view-home">Return</button
           >
+        </div>
+
+        <!-- Right: Profile Content Panel -->
+        <div
+          class="profile-details-container relative w-[45%] h-[65vh] bg-p5-white border-[8px] border-p5-black transform skew-x-[-3deg] shadow-[20px_20px_0px_#e60012] flex overflow-hidden ml-8"
+        >
+          <!-- Identity Content -->
+          <div id="profile-identity" class="profile-content-panel absolute inset-0 p-10 flex flex-col justify-center">
+            <h2
+              class="font-display text-7xl uppercase mb-6 border-b-8 border-p5-red pb-2 inline-block text-p5-black"
+            >
+              Demura AI
+            </h2>
+            <p class="text-3xl font-black font-sans text-p5-black uppercase mb-2">
+              Software Engineer
+            </p>
+            <p class="text-3xl font-black font-sans text-p5-red uppercase mb-2">
+              Cloud Engineer
+            </p>
+            <p class="text-3xl font-black font-sans text-p5-gray uppercase">
+              IoT Engineer
+            </p>
+            <div class="mt-8 bg-p5-black text-p5-white p-4 transform skew-x-6 inline-block self-start font-bold uppercase">
+              Status: Active
+            </div>
+          </div>
+
+          <!-- Stats Content -->
+          <div id="profile-stats" class="profile-content-panel absolute inset-0 p-10 flex flex-col justify-center opacity-0 pointer-events-none" style="display:none;">
+            <h2 class="font-display text-7xl uppercase mb-8 text-p5-red">Parameters</h2>
+            <ul class="text-2xl mt-4 space-y-6 font-black font-sans uppercase">
+              <li class="flex items-center gap-4">
+                <span class="w-32">Logic</span>
+                <div class="h-6 bg-p5-gray flex-grow border-2 border-p5-black"><div class="h-full bg-p5-red w-full"></div></div>
+                <span>Max</span>
+              </li>
+              <li class="flex items-center gap-4">
+                <span class="w-32">Creativity</span>
+                <div class="h-6 bg-p5-gray flex-grow border-2 border-p5-black"><div class="h-full bg-p5-red w-4/5"></div></div>
+                <span>Rank 4</span>
+              </li>
+              <li class="flex items-center gap-4">
+                <span class="w-32">Guts</span>
+                <div class="h-6 bg-p5-gray flex-grow border-2 border-p5-black"><div class="h-full bg-p5-red w-full"></div></div>
+                <span>Max</span>
+              </li>
+              <li class="flex items-center gap-4">
+                <span class="w-32">Efficiency</span>
+                <div class="h-6 bg-p5-gray flex-grow border-2 border-p5-black"><div class="h-full bg-p5-red w-11/12"></div></div>
+                <span>Rank 5</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Skills Content -->
+          <div id="profile-skills" class="profile-content-panel absolute inset-0 p-10 flex flex-col justify-center opacity-0 pointer-events-none" style="display:none;">
+            <h2 class="font-display text-7xl uppercase mb-6 text-p5-black">Arsenal</h2>
+            <div class="grid grid-cols-2 gap-4 font-sans font-black text-xl uppercase mt-4">
+              <div class="bg-p5-red text-p5-white p-4 transform -skew-x-6 border-l-[8px] border-p5-black shadow-md">TypeScript</div>
+              <div class="bg-p5-black text-p5-white p-4 transform skew-x-3 border-l-[8px] border-p5-red shadow-md">Astro</div>
+              <div class="bg-p5-gray text-p5-white p-4 transform skew-x-6 border-l-[8px] border-p5-black shadow-md">GSAP</div>
+              <div class="bg-p5-white text-p5-black border-[4px] border-p5-black p-4 transform -skew-x-3 shadow-md">Tailwind</div>
+              <div class="bg-p5-black text-p5-white p-4 transform -skew-x-6 border-l-[8px] border-p5-red shadow-md">After Effects</div>
+              <div class="bg-p5-red text-p5-white p-4 transform skew-x-6 border-l-[8px] border-p5-black shadow-md">Photoshop</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -359,33 +417,36 @@ import Layout from "../layouts/Layout.astro";
         <!-- Left: Roster List -->
         <div class="flex flex-col gap-4 w-1/3 max-w-[320px] z-20">
           <div
-            class="roster-item bg-p5-white text-p5-black border-[5px] border-p5-black p-4 transform -skew-x-12 cursor-pointer hover:bg-p5-red hover:text-p5-white transition-colors p5-shadow"
+            class="roster-item active bg-p5-red text-p5-white border-[5px] border-p5-black p-4 transform -skew-x-12 cursor-pointer hover:bg-p5-black hover:text-p5-white transition-colors p5-shadow"
+            data-persona="persona-se"
           >
-            <h3 class="font-display text-4xl uppercase">The Architect</h3>
+            <h3 class="font-display text-4xl uppercase">Software Eng.</h3>
             <p
               class="font-sans font-black text-sm uppercase tracking-widest opacity-80"
             >
-              Fullstack System
+              System Builder
             </p>
           </div>
           <div
-            class="roster-item bg-p5-black text-p5-white border-[5px] border-p5-red p-4 transform skew-x-6 cursor-pointer hover:bg-p5-red transition-colors p5-shadow ml-6"
+            class="roster-item bg-p5-white text-p5-black border-[5px] border-p5-black p-4 transform skew-x-6 cursor-pointer hover:bg-p5-red hover:text-p5-white transition-colors p5-shadow ml-6"
+            data-persona="persona-ce"
           >
-            <h3 class="font-display text-4xl uppercase">The Artist</h3>
+            <h3 class="font-display text-4xl uppercase">Cloud Eng.</h3>
             <p
               class="font-sans font-black text-sm uppercase tracking-widest opacity-80"
             >
-              UX & Visuals
+              Infrastructure
             </p>
           </div>
           <div
-            class="roster-item bg-p5-gray text-p5-white border-[5px] border-p5-black p-4 transform -skew-x-6 cursor-pointer hover:bg-p5-red transition-colors p5-shadow ml-[-10px]"
+            class="roster-item bg-p5-white text-p5-black border-[5px] border-p5-black p-4 transform -skew-x-6 cursor-pointer hover:bg-p5-red hover:text-p5-white transition-colors p5-shadow ml-[-10px]"
+            data-persona="persona-iot"
           >
-            <h3 class="font-display text-4xl uppercase">The Oracle</h3>
+            <h3 class="font-display text-4xl uppercase">IoT Eng.</h3>
             <p
               class="font-sans font-black text-sm uppercase tracking-widest opacity-80"
             >
-              AI Integration
+              Hardware Sync
             </p>
           </div>
           <button
@@ -402,53 +463,104 @@ import Layout from "../layouts/Layout.astro";
             class="absolute right-[-15%] top-[-5%] text-[18rem] font-display text-p5-black opacity-10 uppercase transform -rotate-12 leading-none pointer-events-none"
             style="writing-mode: vertical-rl;"
           >
-            STATS
+            SKILLS
           </div>
 
           <div class="relative z-10 w-full p-8 flex flex-col gap-6">
-            <!-- Mock Radar Chart Shape -->
-            <div
-              class="w-48 h-48 bg-p5-black mx-auto shadow-[0_0_30px_rgba(255,255,255,0.7)]"
-              style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);"
-            >
+
+            <!-- Persona 1: Software Engineer -->
+            <div id="persona-se" class="persona-panel w-full">
+              <!-- Mock Radar Chart Shape -->
               <div
-                class="w-full h-full bg-p5-red transform scale-[0.6] opacity-80"
-                style="clip-path: polygon(50% 10%, 90% 60%, 75% 90%, 30% 80%, 10% 40%);"
+                class="w-48 h-48 bg-p5-black mx-auto shadow-[0_0_30px_rgba(255,255,255,0.7)]"
+                style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);"
               >
+                <div
+                  class="w-full h-full bg-p5-white transform scale-[0.6] opacity-80"
+                  style="clip-path: polygon(50% 10%, 90% 60%, 75% 90%, 30% 80%, 10% 40%);"
+                >
+                </div>
+              </div>
+
+              <div
+                class="bg-p5-white text-p5-black p-6 transform -skew-x-6 border-l-[15px] border-p5-black shadow-xl mt-6"
+              >
+                <h2 class="font-display text-5xl uppercase mb-3 text-p5-red">
+                  SE Techniques
+                </h2>
+                <div
+                  class="grid grid-cols-2 gap-3 font-sans font-black text-sm uppercase"
+                >
+                  <div class="bg-p5-gray text-white p-2 text-center transform skew-x-6 border-b-[4px] border-p5-red">TypeScript Strike</div>
+                  <div class="bg-p5-gray text-white p-2 text-center transform -skew-x-3 border-b-[4px] border-p5-white">React Barrier</div>
+                  <div class="bg-p5-gray text-white p-2 text-center transform skew-x-3 border-b-[4px] border-p5-white">Tailwind Shell</div>
+                  <div class="bg-p5-red text-white p-2 text-center transform -skew-x-6 border-b-[4px] border-p5-black">Astro Burst</div>
+                </div>
               </div>
             </div>
 
-            <div
-              class="bg-p5-white text-p5-black p-6 transform -skew-x-6 border-l-[15px] border-p5-black shadow-xl"
-            >
-              <h2 class="font-display text-5xl uppercase mb-3 text-p5-red">
-                Techniques
-              </h2>
+            <!-- Persona 2: Cloud Engineer -->
+            <div id="persona-ce" class="persona-panel w-full" style="display:none; opacity:0;">
+              <!-- Mock Radar Chart Shape -->
               <div
-                class="grid grid-cols-2 gap-3 font-sans font-black text-sm uppercase"
+                class="w-48 h-48 bg-p5-black mx-auto shadow-[0_0_30px_rgba(255,255,255,0.7)]"
+                style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);"
               >
                 <div
-                  class="bg-p5-gray text-white p-2 text-center transform skew-x-6 border-b-[4px] border-p5-red"
+                  class="w-full h-full bg-p5-gray transform scale-[0.6] opacity-80"
+                  style="clip-path: polygon(50% 20%, 80% 50%, 60% 80%, 40% 90%, 20% 40%);"
                 >
-                  TypeScript Strike
                 </div>
+              </div>
+
+              <div
+                class="bg-p5-white text-p5-black p-6 transform -skew-x-6 border-l-[15px] border-p5-black shadow-xl mt-6"
+              >
+                <h2 class="font-display text-5xl uppercase mb-3 text-p5-red">
+                  Cloud Techniques
+                </h2>
                 <div
-                  class="bg-p5-gray text-white p-2 text-center transform -skew-x-3 border-b-[4px] border-p5-white"
+                  class="grid grid-cols-2 gap-3 font-sans font-black text-sm uppercase"
                 >
-                  React Barrier
-                </div>
-                <div
-                  class="bg-p5-gray text-white p-2 text-center transform skew-x-3 border-b-[4px] border-p5-white"
-                >
-                  Tailwind Shell
-                </div>
-                <div
-                  class="bg-p5-red text-white p-2 text-center transform -skew-x-6 border-b-[4px] border-p5-black"
-                >
-                  Astro Burst
+                  <div class="bg-p5-black text-white p-2 text-center transform skew-x-6 border-b-[4px] border-p5-red">AWS Lambda</div>
+                  <div class="bg-p5-gray text-white p-2 text-center transform -skew-x-3 border-b-[4px] border-p5-white">Docker Container</div>
+                  <div class="bg-p5-gray text-white p-2 text-center transform skew-x-3 border-b-[4px] border-p5-white">CI/CD Pipeline</div>
+                  <div class="bg-p5-red text-white p-2 text-center transform -skew-x-6 border-b-[4px] border-p5-black">GCP Deploy</div>
                 </div>
               </div>
             </div>
+
+            <!-- Persona 3: IoT Engineer -->
+            <div id="persona-iot" class="persona-panel w-full" style="display:none; opacity:0;">
+              <!-- Mock Radar Chart Shape -->
+              <div
+                class="w-48 h-48 bg-p5-black mx-auto shadow-[0_0_30px_rgba(255,255,255,0.7)]"
+                style="clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);"
+              >
+                <div
+                  class="w-full h-full bg-p5-black transform scale-[0.6] opacity-80 border-4 border-p5-white"
+                  style="clip-path: polygon(50% 5%, 95% 45%, 85% 95%, 15% 95%, 5% 45%);"
+                >
+                </div>
+              </div>
+
+              <div
+                class="bg-p5-white text-p5-black p-6 transform -skew-x-6 border-l-[15px] border-p5-black shadow-xl mt-6"
+              >
+                <h2 class="font-display text-5xl uppercase mb-3 text-p5-red">
+                  IoT Techniques
+                </h2>
+                <div
+                  class="grid grid-cols-2 gap-3 font-sans font-black text-sm uppercase"
+                >
+                  <div class="bg-p5-gray text-white p-2 text-center transform skew-x-6 border-b-[4px] border-p5-red">Arduino Logic</div>
+                  <div class="bg-p5-black text-white p-2 text-center transform -skew-x-3 border-b-[4px] border-p5-white">ESP32 Sync</div>
+                  <div class="bg-p5-gray text-white p-2 text-center transform skew-x-3 border-b-[4px] border-p5-white">MQTT Protocol</div>
+                  <div class="bg-p5-red text-white p-2 text-center transform -skew-x-6 border-b-[4px] border-p5-black">Sensor Link</div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -458,59 +570,103 @@ import Layout from "../layouts/Layout.astro";
       <!-- ============================================== -->
       <div
         id="view-projects"
-        class="page-view absolute inset-0 flex flex-col items-center justify-center w-full h-full opacity-0 pointer-events-none"
+        class="page-view absolute inset-0 flex flex-row items-center justify-center w-full h-full opacity-0 pointer-events-none"
         style="display:none;"
       >
-        <div
-          class="bg-p5-black text-p5-white border-[10px] border-p5-red p-8 w-full max-w-4xl transform skew-x-[3deg] shadow-[15px_15px_0px_#fff] view-content max-h-[80vh] overflow-y-auto overflow-x-hidden"
-        >
-          <h2
-            class="font-display text-8xl uppercase mb-2 text-p5-red shadow-black drop-shadow-[5px_5px_0_black] glitch-item"
+        <div class="flex w-[85%] max-w-6xl h-[80vh] gap-6">
+
+          <!-- Left: Mission List -->
+          <div
+            class="w-1/2 bg-p5-black text-p5-white border-[10px] border-p5-red p-8 transform skew-x-[3deg] shadow-[15px_15px_0px_#fff] view-content flex flex-col"
           >
-            <span>Missions</span>
-          </h2>
-          <div class="flex flex-col gap-4 mt-8">
-            <div
-              class="p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors group cursor-pointer p5-shadow relative block overflow-hidden transform -skew-x-6"
+            <h2
+              class="font-display text-8xl uppercase mb-2 text-p5-red shadow-black drop-shadow-[5px_5px_0_black] glitch-item"
             >
-              <h3
-                class="font-display text-4xl transform transition-transform group-hover:scale-105 origin-left"
+              <span>Missions</span>
+            </h2>
+            <div class="flex flex-col gap-4 mt-8 flex-grow overflow-y-auto pr-2 custom-scrollbar">
+              <div
+                class="mission-item active p-6 bg-p5-white text-p5-black border-l-8 border-p5-red transition-colors cursor-pointer p5-shadow relative block overflow-hidden transform -skew-x-6"
+                data-mission="mission-sw"
               >
-                Target: Cyber Core
-              </h3>
-              <p class="font-sans font-bold opacity-80">
-                Steal the heavily guarded database.
-              </p>
+                <h3 class="font-display text-4xl transform origin-left">Target: Cyber Core</h3>
+                <p class="font-sans font-bold opacity-80">Software Engineering System</p>
+              </div>
+              <div
+                class="mission-item p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors cursor-pointer p5-shadow relative block overflow-hidden transform skew-x-3"
+                data-mission="mission-cloud"
+              >
+                <h3 class="font-display text-4xl transform origin-left">Target: Cloud Citadel</h3>
+                <p class="font-sans font-bold opacity-80">Cloud Infrastructure Setup</p>
+              </div>
+              <div
+                class="mission-item p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors cursor-pointer p5-shadow relative block overflow-hidden transform -skew-x-3"
+                data-mission="mission-iot"
+              >
+                <h3 class="font-display text-4xl transform origin-left">Target: Node Nexus</h3>
+                <p class="font-sans font-bold opacity-80">IoT Network Integration</p>
+              </div>
             </div>
-            <div
-              class="p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors group cursor-pointer p5-shadow relative block overflow-hidden transform skew-x-3"
+            <button
+              class="nav-btn mt-6 block p5-shadow bg-p5-white text-p5-black font-display text-3xl py-2 px-8 uppercase hover:bg-p5-red hover:text-p5-white transition-colors self-start"
+              data-nav-target="view-home">Retreat</button
             >
-              <h3
-                class="font-display text-4xl transform transition-transform group-hover:scale-105 origin-left"
-              >
-                Target: UI Overhaul
-              </h3>
-              <p class="font-sans font-bold opacity-80">
-                Rewrite the perception of reality.
-              </p>
-            </div>
-            <div
-              class="p-6 bg-p5-gray border-l-8 border-p5-red hover:bg-p5-white hover:text-p5-black transition-colors group cursor-pointer p5-shadow relative block overflow-hidden transform -skew-x-3"
-            >
-              <h3
-                class="font-display text-4xl transform transition-transform group-hover:scale-105 origin-left"
-              >
-                Target: The Eternal Log
-              </h3>
-              <p class="font-sans font-bold opacity-80">
-                Dive back into the Mementos archives.
-              </p>
-            </div>
           </div>
-          <button
-            class="nav-btn mt-8 block p5-shadow bg-p5-white text-p5-black font-display text-3xl py-2 px-8 uppercase hover:bg-p5-red hover:text-p5-white transition-colors"
-            data-nav-target="view-home">Retreat</button
-          >
+
+          <!-- Right: Mission Details -->
+          <div class="mission-details-container w-1/2 relative bg-p5-white border-[8px] border-p5-black transform skew-x-[-3deg] shadow-[15px_15px_0px_#e60012] overflow-hidden view-content">
+
+            <div class="absolute right-2 top-2 text-8xl font-display text-p5-gray opacity-20 uppercase pointer-events-none">
+              INTEL
+            </div>
+
+            <!-- Detail: Software -->
+            <div id="mission-sw" class="mission-panel absolute inset-0 p-8 flex flex-col justify-center">
+              <div class="bg-p5-red text-p5-white px-4 py-1 inline-block transform -skew-x-12 font-bold mb-4 self-start">Rank: S</div>
+              <h2 class="font-display text-6xl uppercase mb-4 text-p5-black border-b-4 border-p5-red pb-2">Cyber Core</h2>
+              <p class="font-sans text-xl font-semibold mb-6">Infiltrated the legacy systems and replaced them with a highly scalable TypeScript and Astro architecture.</p>
+              <div class="bg-p5-black text-p5-white p-4 transform skew-x-3">
+                <h4 class="font-display text-2xl uppercase text-p5-red mb-2">Loot (Tech Used)</h4>
+                <ul class="list-disc list-inside font-sans font-bold">
+                  <li>TypeScript</li>
+                  <li>Astro & GSAP</li>
+                  <li>TailwindCSS</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Detail: Cloud -->
+            <div id="mission-cloud" class="mission-panel absolute inset-0 p-8 flex flex-col justify-center opacity-0 pointer-events-none" style="display:none;">
+              <div class="bg-p5-black text-p5-white px-4 py-1 inline-block transform -skew-x-12 font-bold mb-4 self-start">Rank: A</div>
+              <h2 class="font-display text-6xl uppercase mb-4 text-p5-red border-b-4 border-p5-black pb-2">Cloud Citadel</h2>
+              <p class="font-sans text-xl font-semibold mb-6">A massive operation to secure data payloads across AWS and GCP, utilizing serverless functions and automated CI/CD pipelines.</p>
+              <div class="bg-p5-gray text-p5-white p-4 transform -skew-x-3">
+                <h4 class="font-display text-2xl uppercase text-p5-black mb-2">Loot (Tech Used)</h4>
+                <ul class="list-disc list-inside font-sans font-bold">
+                  <li>Docker & Kubernetes</li>
+                  <li>AWS Lambda</li>
+                  <li>GitHub Actions</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Detail: IoT -->
+            <div id="mission-iot" class="mission-panel absolute inset-0 p-8 flex flex-col justify-center opacity-0 pointer-events-none" style="display:none;">
+              <div class="bg-p5-gray text-p5-black px-4 py-1 inline-block transform -skew-x-12 font-bold mb-4 self-start">Rank: S+</div>
+              <h2 class="font-display text-6xl uppercase mb-4 text-p5-black border-b-4 border-p5-red pb-2">Node Nexus</h2>
+              <p class="font-sans text-xl font-semibold mb-6">Breached the physical realm by syncing dozens of ESP32 sensors into a unified MQTT broker, creating a localized surveillance network.</p>
+              <div class="bg-p5-red text-p5-white p-4 transform skew-x-6 border-l-8 border-p5-black">
+                <h4 class="font-display text-2xl uppercase text-p5-black mb-2">Loot (Tech Used)</h4>
+                <ul class="list-disc list-inside font-sans font-bold">
+                  <li>ESP32 / Arduino</li>
+                  <li>MQTT</li>
+                  <li>Node.js Broker</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
         </div>
       </div>
 
@@ -531,18 +687,32 @@ import Layout from "../layouts/Layout.astro";
             Call Card
           </h2>
           <p
-            class="text-3xl font-sans font-black mb-8 bg-p5-black p-4 transform skew-x-[-10deg]"
+            class="text-3xl font-sans font-black mb-6 bg-p5-black p-4 transform skew-x-[-10deg]"
           >
-            We will take your heart.
+            Let's build the Metaverse.
           </p>
-          <a
-            href="mailto:ghost@demura.ai"
-            class="inline-block p5-shadow bg-p5-white text-p5-black font-display text-4xl py-4 px-10 uppercase hover:bg-p5-black hover:text-p5-white transition-colors skew-x-6"
-            >Send Request</a
-          >
-          <div class="mt-12">
+
+          <div class="flex flex-col gap-4 mb-8 w-full">
+            <a
+              href="mailto:ghost@demura.ai"
+              class="w-full block p5-shadow bg-p5-white text-p5-black font-display text-3xl py-3 px-8 uppercase hover:bg-p5-black hover:text-p5-white transition-colors skew-x-3"
+              >Email</a
+            >
+            <a
+              href="#"
+              class="w-full block p5-shadow bg-p5-black text-p5-white font-display text-3xl py-3 px-8 uppercase hover:bg-p5-white hover:text-p5-black transition-colors -skew-x-3"
+              >GitHub</a
+            >
+            <a
+              href="#"
+              class="w-full block p5-shadow bg-p5-white text-p5-black font-display text-3xl py-3 px-8 uppercase hover:bg-p5-black hover:text-p5-white transition-colors skew-x-6"
+              >LinkedIn</a
+            >
+          </div>
+
+          <div class="mt-4">
             <button
-              class="nav-btn p5-shadow bg-p5-black text-p5-white font-display text-2xl py-2 px-6 uppercase"
+              class="nav-btn p5-shadow bg-p5-black text-p5-white font-display text-2xl py-2 px-6 uppercase border-2 border-p5-white hover:bg-p5-white hover:text-p5-black transition-colors"
               data-nav-target="view-home">Back to Hideout</button
             >
           </div>
@@ -734,7 +904,7 @@ import Layout from "../layouts/Layout.astro";
 
         // Core View Swapping Logic
         const targetElements = targetView.querySelectorAll(
-          ".view-content, .logo-container, .nav-btn, .menu-list button, .roster-item, .roster-details",
+          ".view-content, .logo-container, .nav-btn, .menu-list button, .roster-item, .roster-details, .profile-menu-item, .profile-details-container, .mission-item, .mission-details-container",
         );
         const swapViews = () => {
           gsap.set(currentActiveView, {
@@ -1055,7 +1225,151 @@ import Layout from "../layouts/Layout.astro";
       });
     });
 
-    // --- 4. Glitch Effect Hover ---
+    // --- 4. Profile Sub-Menu Logic (Menu inside Menu) ---
+    const profileMenuItems = document.querySelectorAll(".profile-menu-item");
+    profileMenuItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const targetId = item.getAttribute("data-target");
+        if (!targetId) return;
+
+        const targetPanel = document.getElementById(targetId);
+        if (!targetPanel || targetPanel.style.display !== "none") return;
+
+        // Update active class
+        profileMenuItems.forEach(i => {
+          i.classList.remove("bg-p5-red", "text-p5-white");
+          i.classList.add("bg-p5-white", "text-p5-black");
+        });
+        item.classList.remove("bg-p5-white", "text-p5-black");
+        item.classList.add("bg-p5-red", "text-p5-white");
+
+        const currentActivePanel = document.querySelector(".profile-content-panel:not([style*='display: none'])");
+
+        const tl = gsap.timeline();
+
+        // Hide current
+        if (currentActivePanel) {
+           tl.to(currentActivePanel, {
+             opacity: 0,
+             x: -50,
+             duration: 0.2,
+             ease: "power2.in",
+             onComplete: () => {
+               (currentActivePanel as HTMLElement).style.display = "none";
+               (currentActivePanel as HTMLElement).style.pointerEvents = "none";
+             }
+           });
+        }
+
+        // Show new (Slice in like P3/P5 menus)
+        tl.set(targetPanel, { display: "flex", opacity: 0, x: 100, clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)", pointerEvents: "auto" })
+          .to(targetPanel, {
+            opacity: 1,
+            x: 0,
+            clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
+            duration: 0.5,
+            ease: "power4.out"
+          });
+      });
+    });
+
+    // --- 4.5 Personas Sub-Menu Logic ---
+    const rosterItems = document.querySelectorAll(".roster-item");
+    rosterItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const targetId = item.getAttribute("data-persona");
+        if (!targetId) return;
+
+        const targetPanel = document.getElementById(targetId);
+        if (!targetPanel || targetPanel.style.display !== "none") return;
+
+        // Update active class
+        rosterItems.forEach(i => {
+          i.classList.remove("bg-p5-red", "text-p5-white");
+          i.classList.add("bg-p5-white", "text-p5-black");
+        });
+        item.classList.remove("bg-p5-white", "text-p5-black");
+        item.classList.add("bg-p5-red", "text-p5-white");
+
+        const currentActivePanel = document.querySelector(".persona-panel:not([style*='display: none'])");
+
+        const tl = gsap.timeline();
+
+        // Hide current
+        if (currentActivePanel) {
+           tl.to(currentActivePanel, {
+             opacity: 0,
+             scale: 0.9,
+             duration: 0.2,
+             ease: "power2.in",
+             onComplete: () => {
+               (currentActivePanel as HTMLElement).style.display = "none";
+               (currentActivePanel as HTMLElement).style.pointerEvents = "none";
+             }
+           });
+        }
+
+        // Show new (Burst in like Persona summoning)
+        tl.set(targetPanel, { display: "block", opacity: 0, scale: 1.1, pointerEvents: "auto" })
+          .to(targetPanel, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.4,
+            ease: "back.out(2)"
+          });
+      });
+    });
+
+    // --- 4.7 Missions Sub-Menu Logic ---
+    const missionItems = document.querySelectorAll(".mission-item");
+    missionItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        const targetId = item.getAttribute("data-mission");
+        if (!targetId) return;
+
+        const targetPanel = document.getElementById(targetId);
+        if (!targetPanel || targetPanel.style.display !== "none") return;
+
+        // Update active class
+        missionItems.forEach(i => {
+          i.classList.remove("bg-p5-white", "text-p5-black");
+          i.classList.add("bg-p5-gray", "text-white");
+        });
+        item.classList.remove("bg-p5-gray", "text-white");
+        item.classList.add("bg-p5-white", "text-p5-black");
+
+        const currentActivePanel = document.querySelector(".mission-panel:not([style*='display: none'])");
+
+        const tl = gsap.timeline();
+
+        // Hide current
+        if (currentActivePanel) {
+           tl.to(currentActivePanel, {
+             opacity: 0,
+             y: -50,
+             skewX: 10,
+             duration: 0.25,
+             ease: "power2.in",
+             onComplete: () => {
+               (currentActivePanel as HTMLElement).style.display = "none";
+               (currentActivePanel as HTMLElement).style.pointerEvents = "none";
+             }
+           });
+        }
+
+        // Show new (Diagonal slice drop in)
+        tl.set(targetPanel, { display: "flex", opacity: 0, y: 50, skewX: -10, pointerEvents: "auto" })
+          .to(targetPanel, {
+            opacity: 1,
+            y: 0,
+            skewX: 0,
+            duration: 0.5,
+            ease: "back.out(1.5)"
+          });
+      });
+    });
+
+    // --- 5. Glitch Effect Hover ---
     const glitchItems = document.querySelectorAll(
       ".glitch-item span, .glitch-item",
     );
